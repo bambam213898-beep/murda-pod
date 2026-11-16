@@ -74,7 +74,7 @@
 
   const PLAYER = 'A';
   const BLIPS = [
-    { id: 'studio', node: 'C', c: '#ff2e88', g: 'M', t: 'Murda Pod Studios', z: 'VICE CITY', d: "Where the show happened — until it got cut short. The full uncut video drops when the timer hits zero." },
+    { id: 'studio', node: 'C', c: '#ff2e88', g: 'M', t: 'Real Report Studios', z: 'VICE CITY', d: "Where the show happened — until it got cut short. The full uncut video drops when the timer hits zero." },
     { id: 'strip', node: 'R', c: '#12e0c4', g: '☀', t: 'Ocean Strip', z: 'OCEAN STRIP', d: 'Neon hotels, beach traffic and the boardwalk. This is where you spawn in Free Roam.' },
     { id: 'glades', node: 'K', c: '#7ce38b', g: '🐊', t: 'Gator Glades', z: 'GATOR GLADES', d: 'Swamp country. The call-in line gets its strangest calls from out here.' },
     { id: 'brooklyn', node: 'H', c: '#ffd23f', g: '★', t: 'Little Brooklyn', z: 'LITTLE BROOKLYN', d: 'A piece of home down south. The Rap Up notebook is rumored to be stashed here.' },

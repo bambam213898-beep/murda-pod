@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Murda Radio — Live From Leonida</title>
+<title>The Real Report — Live From Leonida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Pinyon+Script&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=11">
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -15,6 +15,23 @@
 </script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rr" viewBox="0 0 1000 1000">
+    <defs><path id="rrRing" d="M500,500 m-398,0 a398,398 0 1,1 796,0 a398,398 0 1,1 -796,0"/></defs>
+    <circle cx="500" cy="500" r="492" fill="#0a0a0a"/>
+    <circle cx="500" cy="500" r="486" fill="none" stroke="#fff" stroke-width="10"/>
+    <circle cx="500" cy="500" r="352" fill="#0a0a0a" stroke="#fff" stroke-width="10"/>
+    <text font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="84" fill="#fff" letter-spacing="2"><textPath href="#rrRing" startOffset="0" textLength="2490" lengthAdjust="spacing">• THE REAL REPORT • THE REAL REPORT</textPath></text>
+    <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
+      <circle cx="500" cy="500" r="300"/>
+      <ellipse cx="500" cy="500" rx="105" ry="300"/><ellipse cx="500" cy="500" rx="210" ry="300"/>
+      <line x1="500" y1="200" x2="500" y2="800"/><line x1="200" y1="500" x2="800" y2="500"/>
+      <path d="M286,290 Q500,276 714,290"/><path d="M221,390 Q500,376 779,390"/><path d="M221,610 Q500,624 779,610"/><path d="M286,710 Q500,724 714,710"/>
+    </g>
+    <text x="508" y="650" text-anchor="middle" font-family="'Pinyon Script', 'Snell Roundhand', cursive" font-size="520" fill="#fff" stroke="#0a0a0a" stroke-width="34" stroke-linejoin="round" paint-order="stroke">R</text>
+    <text x="508" y="650" text-anchor="middle" font-family="'Pinyon Script', 'Snell Roundhand', cursive" font-size="520" fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round">R</text>
+  </symbol>
+</svg>
 
 <!-- ============ LOADING SCREEN ============ -->
 <div id="loader">
@@ -39,7 +56,7 @@
     <div class="ld-panel p3">
       <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
         <rect width="300" height="400" fill="#1b0b2e"/>
-        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="48" fill="#ff2e88">Murda Pod</text>
+        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="38" fill="#ff2e88">Real Report</text>
         <text x="150" y="122" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#12e0c4" letter-spacing="5">ON AIR • 105.9</text>
         <g fill="#0a0410">
           <rect x="70" y="300" width="160" height="100"/>
@@ -52,7 +69,7 @@
     </div>
   </div>
   <div class="ld-title">
-    <div class="ld-name">UNCLE MURDA</div>
+    <div class="ld-name">THE REAL REPORT</div>
     <div class="ld-sub">Live From Leonida</div>
     <div class="partner ld-partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
   </div>
@@ -66,7 +83,7 @@
 
 <!-- ============ NAV ============ -->
 <nav>
-  <a class="logo" href="#hero"><b>MURDA</b><span>RADIO 105.9</span></a>
+  <a class="logo" href="#hero"><svg class="rr-mini" aria-hidden="true"><use href="#rr"/></svg><b>REAL</b><span>REPORT</span></a>
   <ul>
     <li><a href="#hero">Gameplay</a></li>
     <li><a href="#footage">Footage</a></li>
@@ -85,9 +102,10 @@
 
   <div id="heroTitle">
     <div class="ho-left">
-      <div class="ht-kick">MURDA RADIO PRESENTS</div>
+      <svg class="rr-hero" role="img" aria-label="The Real Report emblem"><use href="#rr"/></svg>
+      <div class="ht-kick">NOW BROADCASTING ACROSS LEONIDA</div>
       <div class="partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
-      <h1>Uncle Murda<span>The Murda Pod</span></h1>
+      <h1>The Real Report<span>Live From Leonida</span></h1>
       <div class="cut-alert"><b>⚠ PODCAST CUT SHORT</b><p>The live episode got shut down mid-show. The full uncut video drops in</p></div>
       <div class="cd" aria-live="polite">
         <div><b data-cd="h">24</b><small>HOURS</small></div><i>:</i>
@@ -106,7 +124,7 @@
         <div class="art-sun"></div>
         <svg class="art-palms" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#1b0b2e"><path d="M40 300 C45 230 35 180 62 120" stroke="#1b0b2e" stroke-width="9" fill="none"/><path d="M62 120 C30 100 0 110 -10 140 C20 120 40 122 62 124Z M62 120 C92 90 122 95 132 125 C112 110 87 112 64 124Z M62 120 C52 80 22 70 2 80 C27 85 47 100 60 122Z M62 120 C77 80 107 70 127 80 C102 85 82 100 64 122Z"/><path d="M360 300 C355 240 368 200 345 150" stroke="#1b0b2e" stroke-width="8" fill="none"/><path d="M345 150 C315 130 290 140 280 165 C305 150 325 152 345 154Z M345 150 C375 125 400 130 410 155 C390 142 365 145 347 154Z M345 150 C340 115 312 105 295 112 C318 118 333 130 343 152Z"/><path d="M0 300 V262 H40 V240 H70 V258 H110 V230 H140 V250 H180 V270 H230 V245 H260 V262 H300 V236 H330 V256 H400 V300Z"/></g></svg>
         <img class="gta-art" alt="Uncle Murda in GTA loading-screen art style">
-        <div class="art-name"><b>UNCLE MURDA</b><small>HOST · THE MURDA POD</small></div>
+        <div class="art-name"><b>UNCLE MURDA</b><small>HOST · THE REAL REPORT</small></div>
       </div>
     </div>
   </div>
@@ -128,8 +146,8 @@
     <div id="speedo"><b id="mph">0</b><span>MPH</span></div>
   </div>
 
-  <div id="drop"><span class="drop-dot"></span><div><small>THE MURDA POD — CUT SHORT</small><b>FULL VIDEO IN <span class="countdown">12:00:00</span></b></div></div>
-  <div id="radioPop"><small>RADIO</small><strong id="radioName">MURDA RADIO 105.9</strong><span id="radioSong"></span></div>
+  <div id="drop"><span class="drop-dot"></span><div><small>THE REAL REPORT — CUT SHORT</small><b>FULL VIDEO IN <span class="countdown">12:00:00</span></b></div></div>
+  <div id="radioPop"><small>RADIO</small><strong id="radioName">REAL REPORT RADIO 105.9</strong><span id="radioSong"></span></div>
   <div id="areaPop"><span id="areaName">Vice Beach</span><small id="areaSub">LEONIDA</small></div>
   <div id="mission"></div>
   <div id="subtitle"></div>
@@ -148,7 +166,7 @@
   </div>
 </header>
 
-<div class="ticker"><div>★ THE MURDA POD — IN PARTNERSHIP WITH ROCKSTAR GAMES ★ THE MURDA POD GOT CUT SHORT ★ FULL UNCUT VIDEO DROPS IN 24 HOURS ★ LNN BREAKING ★ UNCLE MURDA SPOTTED ON THE OCEAN STRIP WITH A MIC AND NO PERMIT ★ THE RAP UP IS COMING — NOBODY IS SAFE ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ CALL-IN LINE JAMMED FOR 6 HOURS STRAIGHT ★ TUNE TO MURDA RADIO 105.9 ★</div></div>
+<div class="ticker"><div>★ THE REAL REPORT — IN PARTNERSHIP WITH ROCKSTAR GAMES ★ THE REAL REPORT GOT CUT SHORT ★ FULL UNCUT VIDEO DROPS IN 24 HOURS ★ LNN BREAKING ★ UNCLE MURDA SPOTTED ON THE OCEAN STRIP WITH A MIC AND NO PERMIT ★ THE RAP UP IS COMING — NOBODY IS SAFE ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ CALL-IN LINE JAMMED FOR 6 HOURS STRAIGHT ★ TUNE TO REAL REPORT RADIO 105.9 ★</div></div>
 
 <!-- ============ FOOTAGE (VIDEO) ============ -->
 <section id="footage">
@@ -156,10 +174,10 @@
     <div class="fg-copy">
       <div class="tag">◉ INCOMING TRANSMISSION</div>
       <h2 class="h2">Leaked <em>Footage</em></h2>
-      <p>Somebody in the Murda Pod crew pulled out their phone. Now it's all over Leonida. Watch it before the label makes them take it down.</p>
+      <p>Somebody in the Real Report crew pulled out their phone. Now it's all over Leonida. Watch it before the label makes them take it down.</p>
       <div class="fg-meta">
         <div><small>SOURCE</small><b>@KillaKreww</b></div>
-        <div><small>LOCATION</small><b>Murda Pod Studios</b></div>
+        <div><small>LOCATION</small><b>Real Report Studios</b></div>
         <div><small>STATUS</small><b class="red">● VIRAL</b></div>
       </div>
       <div class="fg-drop">This clip is all that aired before the podcast got cut short. <b>The full uncut video drops in</b><span class="countdown big">12:00:00</span></div>
@@ -187,7 +205,7 @@
   <div class="wrap">
     <div class="pm">
       <div class="pm-head">
-        <div class="pm-title">Murda Pod<span>LEONIDA</span></div>
+        <div class="pm-title">Real Report<span>LEONIDA</span></div>
         <div class="pm-player">
           <div class="pm-av">UM</div>
           <div><b>UNCLE MURDA</b><small id="pmInfo">SATURDAY 19:42 · BANK $1,250,000</small></div>
@@ -213,7 +231,7 @@
           </div>
           <div class="map-info" id="mapInfo">
             <small>WAYPOINT</small>
-            <h3>Murda Pod Studios</h3>
+            <h3>Real Report Studios</h3>
             <p>Where the show happens. Pull up, put the headphones on, and don't say nothing slick.</p>
           </div>
         </div>
@@ -230,7 +248,7 @@
       <div class="pm-pane" id="pane-pod">
         <div class="pod-drop">
           <div><small>FULL VIDEO DROPS IN</small><b class="countdown">12:00:00</b></div>
-          <p>The Murda Pod, in partnership with Rockstar Games. The live episode got cut short. Only the first segment aired — everything else is in the full uncut video.</p>
+          <p>The Real Report, in partnership with Rockstar Games. The live episode got cut short. Only the first segment aired — everything else is in the full uncut video.</p>
         </div>
         <div class="pod">
           <ul class="eplist" id="eplist"></ul>
@@ -249,12 +267,12 @@
 </section>
 
 <footer>
-  <div class="logo"><b>MURDA</b><span>RADIO 105.9</span></div>
-  <p>The Murda Pod is presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. Radio dialogue and map locations on this site are fictional.</p>
+  <div class="logo"><svg class="rr-mini" aria-hidden="true"><use href="#rr"/></svg><b>REAL</b><span>REPORT</span></div>
+  <p>The Real Report is presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. Radio dialogue and map locations on this site are fictional.</p>
 </footer>
 
-<script src="page.js?v=5"></script>
-<script src="map.js?v=1"></script>
-<script type="module" src="game.js?v=3"></script>
+<script src="page.js?v=10"></script>
+<script src="map.js?v=10"></script>
+<script type="module" src="game.js?v=10"></script>
 </body>
 </html>

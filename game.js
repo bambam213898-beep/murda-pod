@@ -281,7 +281,7 @@ const winSets = Array.from({ length: 4 }, windowPair);
 function signTexture(text, color, font = '90px "Bebas Neue"') {
   return canvasTex(1024, 220, (x, w, h) => { x.clearRect(0, 0, w, h); glowText(x, text, w / 2, h / 2 + 6, font, color, 34); }, { wrap: false });
 }
-const signTexts = [['MURDA RADIO 105.9', '#ff2e88'], ['OCEAN STRIP HOTEL', '#12e0c4'], ['THE MURDA POD', '#ff2e88'], ['LEONIDA LIVE', '#b57bff'], ['RAP UP INN', '#ffb000'], ['VICE BEACH MOTEL', '#3af0ff'], ['GATOR GRILL', '#7cff6b']];
+const signTexts = [['REAL REPORT RADIO 105.9', '#ff2e88'], ['OCEAN STRIP HOTEL', '#12e0c4'], ['THE REAL REPORT', '#ff2e88'], ['LEONIDA LIVE', '#b57bff'], ['RAP UP INN', '#ffb000'], ['VICE BEACH MOTEL', '#3af0ff'], ['GATOR GRILL', '#7cff6b']];
 const signTexes = signTexts.map(([t, c]) => signTexture(t, c));
 const posterTex = canvasTex(1024, 512, (x, w, h) => {
   const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#3b0f5c'); g.addColorStop(0.55, '#ff2e88'); g.addColorStop(1, '#ff8a1f');
@@ -297,8 +297,8 @@ const posterTex = canvasTex(1024, 512, (x, w, h) => {
   x.fillStyle = '#140818'; x.fillRect(624, 280, 36, 70); x.fillRect(860, 280, 36, 70);
   x.strokeStyle = '#ffd23f'; x.lineWidth = 10; x.beginPath(); x.arc(760, 400, 80, 0.2, Math.PI - 0.2); x.stroke();
   x.font = '150px Anton'; x.textAlign = 'left'; x.lineWidth = 12; x.strokeStyle = '#000'; x.fillStyle = '#fff';
-  x.strokeText('MURDA', 40, 210); x.fillText('MURDA', 40, 210);
-  x.strokeText('POD', 40, 360); x.fillText('POD', 40, 360);
+  x.strokeText('REAL', 40, 210); x.fillText('REAL', 40, 210);
+  x.strokeText('REPORT', 40, 360); x.fillText('REPORT', 40, 360);
   x.font = '48px "Bebas Neue"'; x.fillStyle = '#ffd23f'; x.fillText('LIVE FROM LEONIDA  •  105.9', 44, 440);
 }, { wrap: false });
 
@@ -534,7 +534,7 @@ upgradeCar(player, 0xff1f74);
 for (const t of traffic) upgradeCar(t, pick(tColors));
 
 /* =========================================================
-   STUDIO SCENE — the Murda Pod
+   STUDIO SCENE — the Real Report
    ========================================================= */
 const studio = new THREE.Scene();
 studio.background = new THREE.Color(0x05020a);
@@ -583,7 +583,7 @@ rug.rotation.x = -Math.PI / 2; rug.position.set(0, 0.01, 0.6); rug.receiveShadow
 // neon sign
 const neonSign = canvasTex(1024, 300, (x, w, h) => {
   x.clearRect(0, 0, w, h);
-  glowText(x, 'Murda Pod', w / 2, 120, '150px "Permanent Marker"', '#ff2e88', 40);
+  glowText(x, 'Real Report', w / 2, 120, '150px "Permanent Marker"', '#ff2e88', 40);
   glowText(x, 'LIVE  FROM  LEONIDA', w / 2, 250, '64px "Bebas Neue"', '#12e0c4', 26);
 }, { wrap: false });
 const neonMat = new THREE.MeshBasicMaterial({ map: neonSign, transparent: true, depthWrite: false, color: new THREE.Color(1.15, 1.15, 1.15) });
@@ -1096,7 +1096,7 @@ function goStudio(ep) {
     ui.title.classList.add('gone');
     S.line = -1; S.lineT = -2.2; setShot('crane', 4.2);
     renderPass.scene = studio; bokeh.scene = studio; bokeh.enabled = true; renderer.toneMappingExposure = 1.0; bloom.strength = 0.7; bloom.threshold = 0.93;
-    showArea('Murda Pod Studios', 'EPISODE ' + String(S.ep + 1).padStart(2, '0') + ' — ' + EPISODES[S.ep].t.toUpperCase());
+    showArea('Real Report Studios', 'EPISODE ' + String(S.ep + 1).padStart(2, '0') + ' — ' + EPISODES[S.ep].t.toUpperCase());
     ui.mission.classList.remove('show');
   });
 }
@@ -1145,7 +1145,7 @@ function act(a) {
     hero.classList.remove('attract'); ui.title.classList.add('gone');
     S.cine = false; S.camIdx = 0; S.camT = 0; S.studioZ = player.z - 950;
     showArea('Ocean Strip', 'VICE CITY, LEONIDA'); setTimeout(showRadio, 1200);
-    setTimeout(() => showMission('The pod got <b>cut short</b>. Pull up to the <b>Murda Pod</b> studio and see what happened.', 6500), 2600);
+    setTimeout(() => showMission('The pod got <b>cut short</b>. Pull up to the <b>Real Report</b> studio and see what happened.', 6500), 2600);
     hero.scrollIntoView({ behavior: 'smooth' }); setClasses();
   }
   if (a === 'attract') {
@@ -1263,7 +1263,7 @@ function updateCruise(dt) {
   S.djT -= dt;
   if (S.djT < 0) {
     S.djT = rand(14, 20);
-    const lines = ["The pod got cut short. Y'all know why. Full video drops soon — stay locked.", "They shut the studio down on me mid-sentence. The full uncut video is coming.", "You're locked in to Murda Radio, one-oh-five-nine. Don't touch that dial.", "Leonida, if you hear this and you ain't nodding your head — pull over.", 'Rap Up season is coming. I see you, I see ALL of y\'all.', 'Shout out to everybody stuck on the Ocean Strip right now. Bump this.', 'The pod goes live tonight. Pull up or get pulled up on.'];
+    const lines = ["The pod got cut short. Y'all know why. Full video drops soon — stay locked.", "They shut the studio down on me mid-sentence. The full uncut video is coming.", "You're locked in to Real Report Radio, one-oh-five-nine. Don't touch that dial.", "Leonida, if you hear this and you ain't nodding your head — pull over.", 'Rap Up season is coming. I see you, I see ALL of y\'all.', 'Shout out to everybody stuck on the Ocean Strip right now. Bump this.', 'The pod goes live tonight. Pull up or get pulled up on.'];
     if (S.station === 0 && !isAttract()) showSub(`<span class="h">MURDA (RADIO):</span> ${pick(lines)}`, 4500);
   }
   // engine
@@ -1293,7 +1293,7 @@ function updateStudio(dt) {
       S.cash += 25000;
     } else if (S.line > ep.lines.length && S.cine) {
       S.ep = (S.ep + 1) % EPISODES.length; goCruise();
-    } else if (!S.cine && S.line > ep.lines.length) { S.ep = (S.ep + 1) % EPISODES.length; S.line = -1; S.lineT = 0; showArea('Murda Pod Studios', 'EPISODE ' + String(S.ep + 1).padStart(2, '0') + ' — ' + EPISODES[S.ep].t.toUpperCase()); }
+    } else if (!S.cine && S.line > ep.lines.length) { S.ep = (S.ep + 1) % EPISODES.length; S.line = -1; S.lineT = 0; showArea('Real Report Studios', 'EPISODE ' + String(S.ep + 1).padStart(2, '0') + ' — ' + EPISODES[S.ep].t.toUpperCase()); }
   }
   dust.rotation.y = S.T * 0.01; dust.position.y = Math.sin(S.T * 0.2) * 0.1;
   beams[0].material.opacity = 0.08 + Math.sin(S.T * 0.7) * 0.015;

@@ -13,7 +13,7 @@ setInterval(function tick() {
   return tick;
 }(), 1000);
 window.STATIONS = [
-  { name: 'MURDA RADIO', freq: '105.9', color: '#ff2e88', bpm: 90, root: 55, song: 'The Murda Pod — Live' },
+  { name: 'REAL REPORT RADIO', freq: '105.9', color: '#ff2e88', bpm: 90, root: 55, song: 'The Real Report — Live' },
   { name: 'VICE BEACH FM', freq: '98.3', color: '#12e0c4', bpm: 102, root: 61.7, song: 'Neon Tide — Sunset Mix' },
   { name: 'BROOKLYN 2 LEONIDA', freq: '101.1', color: '#ffd23f', bpm: 86, root: 49, song: 'Flatbush Freestyle' },
   { name: 'GATOR TALK', freq: '88.7', color: '#ff8a1f', bpm: 76, root: 46.2, song: 'Swamp Callers Hour' },
@@ -22,7 +22,7 @@ window.STATIONS = [
 
 window.EPISODES = [
   { t: 'Welcome To Leonida', d: 'Murda touches down in Vice City', guest: 'LIL GATOR', lines: [
-    ['H', 'Ayo! We live from Leonida, baby. Murda Pod, episode one.'],
+    ['H', 'Ayo! We live from Leonida, baby. Real Report, episode one.'],
     ['G', 'Unc, you really moved the whole pod down to Vice City?'],
     ['H', 'Brooklyn came down south. The weather finally matches my temper.'],
     ['G', 'Man, it was a gator in the parking lot when I pulled up.'],
@@ -40,7 +40,7 @@ window.EPISODES = [
     ['H', "That's all y'all getting for now. The rest of the pod drops in 12 hours. Don't play with me."],
   ] },
   { t: 'Call-In Chaos', d: "Leonida's wildest phone in", guest: 'CALLER #7', lines: [
-    ['H', "Caller, you're on the Murda Pod. Speak!"],
+    ['H', "Caller, you're on the Real Report. Speak!"],
     ['G', "Yo Unc! I'm on the highway, three cop cars behind me!"],
     ['H', 'Then why you calling a podcast?!'],
     ['G', 'I need a song for the chase, man!'],
@@ -71,7 +71,7 @@ window.EPISODES = [
 /* ---------- Loader tips + fallback if 3D fails ---------- */
 (function () {
   const tips = [
-    'THE MURDA POD GOT CUT SHORT. FULL UNCUT VIDEO DROPS IN 24 HOURS.',
+    'THE REAL REPORT GOT CUT SHORT. FULL UNCUT VIDEO DROPS IN 24 HOURS.',
     "TIP: Murda doesn't do retakes.",
     'TIP: Press Q while driving to flip radio stations.',
     'TIP: The gator in the parking lot is on payroll. Do not feed him.',
@@ -114,7 +114,7 @@ window.EPISODES = [
 
   // Missions
   const missions = [
-    { t: 'Welcome To Leonida', s: 'COMPLETE', o: 'Drive to the Murda Pod studio.', d: 'Murda just landed in Vice City with nothing but a mic, a chain and a grudge. Find the studio, set up the booth, and go live before anybody can stop you.', r: ['$25,000', '+10 RESPECT'] },
+    { t: 'Welcome To Leonida', s: 'COMPLETE', o: 'Drive to the Real Report studio.', d: 'Murda just landed in Vice City with nothing but a mic, a chain and a grudge. Find the studio, set up the booth, and go live before anybody can stop you.', r: ['$25,000', '+10 RESPECT'] },
     { t: 'The Rap Up', s: 'COMPLETE', o: 'Collect the Rap Up notebook in Little Brooklyn.', d: 'Every year Murda calls out the whole industry. This year the notebook went missing on the flight down. Get it back before it ends up online.', r: ['$40,000', '+25 RESPECT'] },
     { t: 'Call-In Chaos', s: 'ACTIVE', o: 'Keep the call-in line on air for 6 minutes.', d: 'Leonida\'s residents are calling in nonstop. Screen the callers, keep the show moving and do NOT let Caller #7 back on the line.', r: ['$15,000', '+5 RESPECT'] },
     { t: 'Beach Beef', s: 'LOCKED', o: 'Confront Jet Ski Jay on the Ocean Strip.', d: 'There was a gesture on the water. Murda says it was disrespect. Jay says it was a wave. Settle it — on the record.', r: ['$20,000', '+15 RESPECT'] },
@@ -179,16 +179,16 @@ window.EPISODES = [
   const stamp = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const btn = document.getElementById('remindBtn');
   if (btn) btn.onclick = () => {
-    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Murda Radio//Countdown//EN', 'BEGIN:VEVENT',
-      'UID:murda-pod-full-video-' + window.RELEASE_AT + '@murdaradio', 'DTSTAMP:' + stamp(Date.now()),
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Real Report Radio//Countdown//EN', 'BEGIN:VEVENT',
+      'UID:real-report-full-video-' + window.RELEASE_AT + '@murdaradio', 'DTSTAMP:' + stamp(Date.now()),
       'DTSTART:' + stamp(window.RELEASE_AT), 'DTEND:' + stamp(window.RELEASE_AT + 3600e3),
-      'SUMMARY:The Murda Pod — full uncut video drops', 'DESCRIPTION:The podcast got cut short. The full uncut video is out now.',
+      'SUMMARY:The Real Report — full uncut video drops', 'DESCRIPTION:The podcast got cut short. The full uncut video is out now.',
       'URL:https://x.com/KillaKreww/status/2120928826079514634',
-      'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Murda Pod full video drops in 10 minutes', 'END:VALARM',
+      'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Real Report full video drops in 10 minutes', 'END:VALARM',
       'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    a.download = 'murda-pod-full-video.ics'; a.click();
+    a.download = 'real-report-full-video.ics'; a.click();
     btn.textContent = '✔ Reminder Saved';
   };
 })();

@@ -355,3 +355,12 @@ footer .logo{justify-content:center;margin-bottom:12px;color:var(--paper)}
 .partner{display:inline-block;margin-top:8px;padding:5px 12px;background:#000c;border:1px solid #ffffff40;border-left:4px solid var(--sun);font-family:"Chakra Petch";font-weight:700;font-size:12px;letter-spacing:3px;color:#ddd;text-shadow:none}
 .partner b{color:#fff;letter-spacing:3px}
 .ld-partner{margin:14px 0 0 20%;transform:none}
+
+/* ===== The Real Report emblem ===== */
+.rr-mini{width:34px;height:34px;filter:drop-shadow(2px 2px 0 #000)}
+.logo b{background:#fff;color:#000}
+.rr-hero{display:block;width:clamp(96px,10vw,140px);height:clamp(96px,10vw,140px);margin-bottom:10px;filter:drop-shadow(5px 5px 0 #000) drop-shadow(0 0 14px #ffffff40)}
+@keyframes rrspin{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+#heroTitle h1{font-size:clamp(52px,7.6vw,118px)}
+#heroTitle h1 span{margin-left:10%}
+.ld-name{font-size:clamp(46px,8vw,120px)}
