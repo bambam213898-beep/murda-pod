@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Murda Radio — Live From Leonida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+
+<!-- ============ LOADING SCREEN ============ -->
+<div id="loader">
+  <div class="ld-art">
+    <div class="ld-panel p1">
+      <div class="ld-art-bg"></div>
+      <img class="gta-art" alt="">
+    </div>
+    <div class="ld-panel p2">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
+        <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".6" stop-color="#ff2e88"/><stop offset="1" stop-color="#12e0c4"/></linearGradient></defs>
+        <rect width="300" height="400" fill="url(#g2)"/>
+        <g fill="#140818">
+          <path d="M40 400 C45 320 35 260 60 190" stroke="#140818" stroke-width="10" fill="none"/>
+          <path d="M60 190 C30 170 0 180 -10 210 C20 190 40 192 60 194Z M60 190 C90 160 120 165 130 195 C110 180 85 182 62 194Z M60 190 C50 150 20 140 0 150 C25 155 45 170 58 192Z M60 190 C75 150 105 140 125 150 C100 155 80 170 62 192Z"/>
+          <path d="M20 360 L60 330 L150 322 L200 300 L250 300 L290 330 L290 370 L20 375Z"/>
+          <circle cx="85" cy="372" r="20"/><circle cx="245" cy="372" r="20"/>
+        </g>
+        <rect x="20" y="370" width="270" height="6" fill="#ff2e88" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="ld-panel p3">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
+        <rect width="300" height="400" fill="#1b0b2e"/>
+        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="48" fill="#ff2e88">Murda Pod</text>
+        <text x="150" y="122" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#12e0c4" letter-spacing="5">ON AIR • 105.9</text>
+        <g fill="#0a0410">
+          <rect x="70" y="300" width="160" height="100"/>
+          <path d="M85 210 L120 250 L125 300 L115 300 L110 255 L80 220Z"/>
+          <rect x="70" y="190" width="30" height="50" rx="12" transform="rotate(-30 85 215)"/>
+        </g>
+        <rect x="70" y="300" width="160" height="6" fill="#ff2e88"/>
+        <circle cx="240" cy="160" r="10" fill="#ff1f1f"/>
+      </svg>
+    </div>
+  </div>
+  <div class="ld-title">
+    <div class="ld-name">UNCLE MURDA</div>
+    <div class="ld-sub">Live From Leonida</div>
+    <div class="partner ld-partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
+  </div>
+  <div class="ld-bottom">
+    <div class="ld-drop">FULL VIDEO IN <span class="countdown">12:00:00</span></div>
+    <div class="ld-tip" id="ldTip">TIP: Murda doesn't do retakes.</div>
+    <button id="startBtn" hidden>CLICK TO START</button>
+    <div class="ld-spin"><i></i><span id="ldStatus">LOADING</span></div>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <a class="logo" href="#hero"><b>MURDA</b><span>RADIO 105.9</span></a>
+  <ul>
+    <li><a href="#hero">Gameplay</a></li>
+    <li><a href="#footage">Footage</a></li>
+    <li><a href="#menu">Map</a></li>
+    <li><a href="#menu" data-open-tab="pod">The Pod</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO / GAME ============ -->
+<header id="hero">
+  <canvas id="game"></canvas>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <div class="letterbox top"></div><div class="letterbox bottom"></div>
+  <div id="fade"></div>
+
+  <div id="heroTitle">
+    <div class="ho-left">
+      <div class="ht-kick">MURDA RADIO PRESENTS</div>
+      <div class="partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
+      <h1>Uncle Murda<span>The Murda Pod</span></h1>
+      <div class="cut-alert"><b>⚠ PODCAST CUT SHORT</b><p>The live episode got shut down mid-show. The full uncut video drops in</p></div>
+      <div class="cd" aria-live="polite">
+        <div><b data-cd="h">12</b><small>HOURS</small></div><i>:</i>
+        <div><b data-cd="m">00</b><small>MINUTES</small></div><i>:</i>
+        <div><b data-cd="s">00</b><small>SECONDS</small></div>
+      </div>
+      <div class="cd-when">Full video drops <b id="releaseLocal"></b></div>
+      <div class="ht-btns">
+        <button class="gbtn" id="remindBtn" type="button">🔔 Remind Me</button>
+        <a class="gbtn alt" href="#footage">▶ Watch the Clip</a>
+        <button class="gbtn ghost" data-act="play" type="button">🚗 Free Roam</button>
+      </div>
+    </div>
+    <div class="ho-art">
+      <div class="art-card">
+        <div class="art-sun"></div>
+        <svg class="art-palms" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#1b0b2e"><path d="M40 300 C45 230 35 180 62 120" stroke="#1b0b2e" stroke-width="9" fill="none"/><path d="M62 120 C30 100 0 110 -10 140 C20 120 40 122 62 124Z M62 120 C92 90 122 95 132 125 C112 110 87 112 64 124Z M62 120 C52 80 22 70 2 80 C27 85 47 100 60 122Z M62 120 C77 80 107 70 127 80 C102 85 82 100 64 122Z"/><path d="M360 300 C355 240 368 200 345 150" stroke="#1b0b2e" stroke-width="8" fill="none"/><path d="M345 150 C315 130 290 140 280 165 C305 150 325 152 345 154Z M345 150 C375 125 400 130 410 155 C390 142 365 145 347 154Z M345 150 C340 115 312 105 295 112 C318 118 333 130 343 152Z"/><path d="M0 300 V262 H40 V240 H70 V258 H110 V230 H140 V250 H180 V270 H230 V245 H260 V262 H300 V236 H330 V256 H400 V300Z"/></g></svg>
+        <img class="gta-art" alt="Uncle Murda in GTA loading-screen art style">
+        <div class="art-name"><b>UNCLE MURDA</b><small>HOST · THE MURDA POD</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hud">
+    <div id="hudTR">
+      <div class="hud-time" id="clock">19:42</div>
+      <div class="hud-cash" id="cash">$1,250,000</div>
+      <div class="hud-weapon">
+        <svg viewBox="0 0 64 32"><rect x="4" y="9" width="30" height="14" rx="7" fill="#fff"/><rect x="34" y="13" width="22" height="6" rx="3" fill="#fff"/><rect x="8" y="12" width="20" height="2" fill="#000" opacity=".4"/><rect x="8" y="17" width="20" height="2" fill="#000" opacity=".4"/></svg>
+        <span>MIC</span>
+      </div>
+      <div class="hud-stars" id="stars"><i class="on">★</i><i class="on">★</i><i class="on">★</i><i>★</i><i>★</i></div>
+    </div>
+    <div id="radar">
+      <canvas id="minimap" width="480" height="300"></canvas>
+      <div class="radar-bars"><i class="hp"><b></b></i><i class="ar"><b></b></i></div>
+    </div>
+    <div id="speedo"><b id="mph">0</b><span>MPH</span></div>
+  </div>
+
+  <div id="drop"><span class="drop-dot"></span><div><small>THE MURDA POD — CUT SHORT</small><b>FULL VIDEO IN <span class="countdown">12:00:00</span></b></div></div>
+  <div id="radioPop"><small>RADIO</small><strong id="radioName">MURDA RADIO 105.9</strong><span id="radioSong"></span></div>
+  <div id="areaPop"><span id="areaName">Vice Beach</span><small id="areaSub">LEONIDA</small></div>
+  <div id="mission"></div>
+  <div id="subtitle"></div>
+  <div id="cutShort"><div class="band"><h2>Podcast Cut Short</h2><p>THE STUDIO GOT SHUT DOWN MID-EPISODE</p><div class="tbc">FULL UNCUT VIDEO DROPS IN <span class="countdown">12:00:00</span></div></div></div>
+  <div id="passed"><div class="band"><h2>Mission Passed</h2><p>RESPECT +</p><small id="passedEp"></small><div class="tbc">TO BE CONTINUED — REST OF THE PODCAST AVAILABLE IN <span class="countdown">12:00:00</span></div></div></div>
+
+  <div id="controls">
+    <div class="ctl-row">
+      <button class="cbtn" data-act="attract" id="modeBtn">⏏ EXIT</button>
+      <button class="cbtn" data-act="cam">🎥 CAMERA</button>
+      <button class="cbtn on" data-act="cine" id="cineBtn">🎬 CINEMATIC</button>
+      <button class="cbtn" data-act="radio">📻 RADIO</button>
+      <button class="cbtn" data-act="mute" id="muteBtn">🔊</button>
+    </div>
+    <div class="ctl-help">W/S speed · A/D lanes · C camera · Q radio · Esc exit</div>
+  </div>
+</header>
+
+<div class="ticker"><div>★ THE MURDA POD — IN PARTNERSHIP WITH ROCKSTAR GAMES ★ THE MURDA POD GOT CUT SHORT ★ FULL UNCUT VIDEO DROPS IN 12 HOURS ★ LNN BREAKING ★ UNCLE MURDA SPOTTED ON THE OCEAN STRIP WITH A MIC AND NO PERMIT ★ THE RAP UP IS COMING — NOBODY IS SAFE ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ CALL-IN LINE JAMMED FOR 6 HOURS STRAIGHT ★ TUNE TO MURDA RADIO 105.9 ★</div></div>
+
+<!-- ============ FOOTAGE (VIDEO) ============ -->
+<section id="footage">
+  <div class="wrap fg-grid">
+    <div class="fg-copy">
+      <div class="tag">◉ INCOMING TRANSMISSION</div>
+      <h2 class="h2">Leaked <em>Footage</em></h2>
+      <p>Somebody in the Murda Pod crew pulled out their phone. Now it's all over Leonida. Watch it before the label makes them take it down.</p>
+      <div class="fg-meta">
+        <div><small>SOURCE</small><b>@KillaKreww</b></div>
+        <div><small>LOCATION</small><b>Murda Pod Studios</b></div>
+        <div><small>STATUS</small><b class="red">● VIRAL</b></div>
+      </div>
+      <div class="fg-drop">This clip is all that aired before the podcast got cut short. <b>The full uncut video drops in</b><span class="countdown big">12:00:00</span></div>
+      <a class="gbtn" href="https://x.com/KillaKreww/status/2120928826079514634" target="_blank" rel="noopener">Open on X ↗</a>
+    </div>
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-status"><span id="phoneTime">19:42</span><span>▲ ▮▮▮ 87%</span></div>
+      <div class="phone-app"><b>CLIPZ</b><span>Trending in Leonida</span></div>
+      <div class="phone-screen" id="tvScreen">
+        <blockquote class="twitter-tweet" data-theme="dark" data-media-max-width="560" data-conversation="none">
+          <a href="https://twitter.com/KillaKreww/status/2120928826079514634"></a>
+        </blockquote>
+        <div class="tv-fallback" id="tvFallback" hidden>
+          Signal lost.<br><a href="https://x.com/KillaKreww/status/2120928826079514634" target="_blank" rel="noopener">▶ Watch the clip on X</a>
+        </div>
+      </div>
+      <div class="phone-home"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAUSE MENU ============ -->
+<section id="menu">
+  <div class="wrap">
+    <div class="pm">
+      <div class="pm-head">
+        <div class="pm-title">Murda Pod<span>LEONIDA</span></div>
+        <div class="pm-player">
+          <div class="pm-av">UM</div>
+          <div><b>UNCLE MURDA</b><small id="pmInfo">SATURDAY 19:42 · BANK $1,250,000</small></div>
+        </div>
+      </div>
+      <div class="pm-tabs" role="tablist">
+        <button class="on" data-tab="map">Map</button>
+        <button data-tab="brief">Brief</button>
+        <button data-tab="pod">Podcast</button>
+        <button data-tab="stats">Stats</button>
+      </div>
+
+      <div class="pm-pane on" id="pane-map">
+        <div class="map-wrap">
+          <div class="map-stage" id="mapStage">
+            <canvas id="mapCanvas" aria-label="Interactive map of Leonida. Drag to pan, scroll to zoom, click a blip to set a waypoint."></canvas>
+            <div class="map-hud tl"><b>LEONIDA</b><small id="mapZone">VICE CITY</small></div>
+            <div class="map-hud tr"><button type="button" data-z="1" aria-label="Zoom in">+</button><button type="button" data-z="-1" aria-label="Zoom out">−</button><button type="button" data-home aria-label="Center on player">◎</button><button type="button" data-fs aria-label="Full screen">⛶</button></div>
+            <div class="map-hud bl"><span class="compass">N</span><span class="scalebar"><i></i><b id="mapScale">5 MI</b></span></div>
+            <div class="map-hud br">DRAG · SCROLL TO ZOOM · CLICK A BLIP TO SET A WAYPOINT</div>
+            <div class="map-scan"></div>
+            <div class="map-tip" id="mapTip" hidden></div>
+          </div>
+          <div class="map-info" id="mapInfo">
+            <small>WAYPOINT</small>
+            <h3>Murda Pod Studios</h3>
+            <p>Where the show happens. Pull up, put the headphones on, and don't say nothing slick.</p>
+          </div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+
+      <div class="pm-pane" id="pane-brief">
+        <div class="brief">
+          <ul class="mlist" id="mlist"></ul>
+          <div class="mdetail" id="mdetail"></div>
+        </div>
+      </div>
+
+      <div class="pm-pane" id="pane-pod">
+        <div class="pod-drop">
+          <div><small>FULL VIDEO DROPS IN</small><b class="countdown">12:00:00</b></div>
+          <p>The Murda Pod, in partnership with Rockstar Games. The live episode got cut short. Only the first segment aired — everything else is in the full uncut video.</p>
+        </div>
+        <div class="pod">
+          <ul class="eplist" id="eplist"></ul>
+          <div class="stations">
+            <h4>Stations</h4>
+            <ul id="stlist"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pm-pane" id="pane-stats">
+        <div class="stats" id="stats"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo"><b>MURDA</b><span>RADIO 105.9</span></div>
+  <p>The Murda Pod is presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. Radio dialogue and map locations on this site are fictional.</p>
+</footer>
+
+<script src="page.js?v=3"></script>
+<script src="map.js?v=1"></script>
+<script type="module" src="game.js?v=3"></script>
+</body>
+</html>

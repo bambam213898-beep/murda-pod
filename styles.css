@@ -1,0 +1,357 @@
+:root{
+  --pink:#ff2e88; --orange:#ff8a1f; --sun:#ffd23f; --teal:#12e0c4; --purple:#5b1f8f;
+  --ink:#07040c; --ink2:#120a1c; --paper:#fff4e6; --muted:#c3b3d3; --gold:#f0c419;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body.locked{overflow:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+
+/* ================= LOADER ================= */
+#loader{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;overflow:hidden;transition:opacity .8s}
+#loader.out{opacity:0;pointer-events:none}
+.ld-art{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;gap:0}
+.ld-panel{position:relative;width:min(30vw,380px);height:min(72vh,560px);border:6px solid #000;overflow:hidden;box-shadow:0 20px 60px #000;animation:kb 18s ease-in-out infinite alternate}
+.ld-panel svg{width:100%;height:100%;display:block}
+.ld-panel.p1{transform:rotate(-4deg) translateY(10px);z-index:2}
+.ld-panel.p2{transform:rotate(3deg) translateY(-20px);margin-left:-40px;z-index:3}
+.ld-panel.p3{transform:rotate(-2deg) translateY(30px);margin-left:-40px;z-index:1}
+@keyframes kb{to{filter:saturate(1.3)}}
+.ld-panel::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#0000 0 3px,#0002 3px 4px);mix-blend-mode:multiply}
+.ld-title{position:absolute;left:5vw;bottom:15vh;z-index:5;transform:rotate(-4deg)}
+.ld-name{font-family:Anton;font-size:clamp(56px,10vw,140px);line-height:.85;color:#fff;-webkit-text-stroke:3px #000;text-shadow:6px 6px 0 #000,10px 10px 0 var(--pink)}
+.ld-sub{font-family:"Permanent Marker";font-size:clamp(26px,4vw,52px);color:var(--sun);-webkit-text-stroke:1.5px #000;text-shadow:3px 3px 0 #000;margin-left:20%}
+.ld-bottom{position:absolute;left:0;right:0;bottom:0;z-index:6;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:linear-gradient(#0000,#000d)}
+.ld-tip{font-family:"Chakra Petch";font-weight:500;font-size:14px;max-width:46%;color:#ddd}
+#startBtn{font-family:"Bebas Neue";font-size:30px;letter-spacing:3px;background:none;border:0;cursor:pointer;color:#fff;animation:breathe 1.6s ease-in-out infinite;text-shadow:0 0 18px var(--pink)}
+@keyframes breathe{50%{opacity:.35}}
+.ld-spin{display:flex;align-items:center;gap:10px;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:13px}
+.ld-spin i{width:22px;height:22px;border:3px solid #fff3;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+.ready .ld-spin i{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:700px){.ld-panel{width:46vw;height:50vh}.ld-panel.p3{display:none}.ld-tip{display:none}}
+
+/* ================= NAV ================= */
+nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:linear-gradient(#000c,#0000);pointer-events:none}
+nav>*{pointer-events:auto}
+.logo{font-family:Anton;font-size:20px;letter-spacing:1px;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo b{background:var(--pink);color:#000;padding:2px 9px;transform:skew(-12deg);display:inline-block;border:2px solid #000}
+.logo span{text-shadow:2px 2px 0 #000}
+nav ul{display:flex;gap:24px;list-style:none;font-family:"Bebas Neue";font-size:20px;letter-spacing:1.5px}
+nav a{text-decoration:none;text-shadow:2px 2px 0 #000}
+nav a:hover{color:var(--sun)}
+@media(max-width:760px){nav ul{display:none}}
+
+/* ================= HERO / GAME ================= */
+#hero{position:relative;height:100vh;min-height:560px;overflow:hidden;background:#1b0b2e}
+#game{position:absolute;inset:0;width:100%;height:100%;display:block}
+.no-webgl #hero{background:linear-gradient(180deg,#2a0a45,#7a1b6b 40%,#ff2e88 62%,#ff8a1f 78%,#ffd23f)}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,#0000 55%,#0008 100%)}
+.grain{position:absolute;inset:-50%;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain .5s steps(4) infinite}
+@keyframes grain{25%{transform:translate(3%,-2%)}50%{transform:translate(-2%,3%)}75%{transform:translate(2%,2%)}}
+.letterbox{position:absolute;left:0;right:0;height:0;background:#000;z-index:8;transition:height .7s cubic-bezier(.7,0,.2,1)}
+.letterbox.top{top:0}.letterbox.bottom{bottom:0}
+.cine .letterbox{height:10.5vh}
+#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:20;transition:opacity .55s}
+#fade.on{opacity:1}
+
+#heroTitle{position:absolute;left:clamp(16px,5vw,70px);top:50%;transform:translateY(-50%);z-index:9;max-width:600px;transition:opacity 1s,transform 1s}
+#heroTitle.gone{opacity:0;transform:translate(-40px,-50%);pointer-events:none}
+.ht-kick{font-family:"Chakra Petch";font-weight:700;letter-spacing:5px;font-size:13px;color:var(--sun);text-shadow:0 2px 4px #000}
+#heroTitle h1{font-family:Anton;text-transform:uppercase;font-weight:400;font-size:clamp(62px,10vw,140px);line-height:.85;margin:10px 0 6px;color:#fff;-webkit-text-stroke:3px #000;text-shadow:6px 6px 0 #000,10px 10px 0 var(--pink);transform:rotate(-3deg)}
+#heroTitle h1 span{display:block;font-family:"Permanent Marker";text-transform:none;font-size:.38em;color:var(--sun);-webkit-text-stroke:1.5px #000;text-shadow:3px 3px 0 #000;margin:10px 0 0 22%}
+#heroTitle p{font-weight:600;max-width:460px;margin:20px 0 24px;text-shadow:0 2px 8px #000,0 0 2px #000}
+.ht-btns{display:flex;gap:14px;flex-wrap:wrap}
+.gbtn{display:inline-block;font-family:"Bebas Neue";font-size:24px;letter-spacing:2px;padding:10px 26px;border:3px solid #000;cursor:pointer;text-decoration:none;background:var(--sun);color:#000;box-shadow:6px 6px 0 #000;transform:skew(-8deg);transition:.15s}
+.gbtn:hover{transform:skew(-8deg) translate(-3px,-3px);box-shadow:9px 9px 0 #000}
+.gbtn.alt{background:var(--pink);color:#fff}
+
+/* HUD */
+#hud{position:absolute;inset:0;pointer-events:none;z-index:7;opacity:0;transition:opacity .6s}
+.playing.hud-on #hud{opacity:1}
+#hudTR{position:absolute;top:70px;right:26px;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.hud-time{font-family:"Chakra Petch";font-weight:700;font-size:16px;text-shadow:0 0 4px #000,0 0 2px #000}
+.hud-cash{font-family:Anton;font-size:38px;color:#7ce38b;-webkit-text-stroke:1.5px #000;text-shadow:2px 2px 0 #000;letter-spacing:.5px}
+.hud-weapon{display:flex;align-items:center;gap:8px;background:#0007;padding:4px 10px;border-radius:4px;margin:4px 0}
+.hud-weapon svg{width:54px;height:27px}
+.hud-weapon span{font-family:"Chakra Petch";font-weight:700;font-size:13px}
+.hud-stars{font-size:26px;letter-spacing:1px}
+.hud-stars i{font-style:normal;color:#ffffff40;-webkit-text-stroke:1px #000}
+.hud-stars i.on{color:#fff;animation:star 1s steps(2) infinite}
+.hud-stars i.on:nth-child(2){animation-delay:.15s}.hud-stars i.on:nth-child(3){animation-delay:.3s}
+@keyframes star{50%{color:#3a86ff}}
+#radar{position:absolute;left:26px;bottom:26px;width:240px}
+#minimap{width:240px;height:150px;display:block;border-radius:6px;box-shadow:0 0 0 2px #0008,0 6px 20px #0008}
+.radar-bars{display:flex;gap:4px;margin-top:4px}
+.radar-bars i{flex:1;height:7px;background:#0009;border:1px solid #000}
+.radar-bars b{display:block;height:100%}
+.radar-bars .hp b{width:82%;background:#58c95b}
+.radar-bars .ar b{width:64%;background:#3a86ff}
+#speedo{position:absolute;right:26px;bottom:28px;text-align:right;font-family:"Chakra Petch";font-weight:700}
+#speedo b{font-size:44px;display:block;line-height:1;text-shadow:0 0 6px #000}
+#speedo span{font-size:12px;letter-spacing:3px;opacity:.8}
+
+#radioPop{position:absolute;top:128px;left:50%;transform:translateX(-50%);text-align:center;z-index:9;opacity:0;transition:opacity .4s;pointer-events:none}
+#radioPop.show{opacity:1}
+#radioPop small{display:block;font-family:"Chakra Petch";font-weight:700;letter-spacing:4px;font-size:11px;opacity:.8}
+#radioPop strong{display:block;font-family:"Bebas Neue";font-size:40px;letter-spacing:2px;text-shadow:0 0 6px #000,2px 2px 0 #000}
+#radioPop span{font-family:"Chakra Petch";font-weight:500;font-size:14px;color:var(--sun);text-shadow:0 0 4px #000}
+#areaPop{position:absolute;right:40px;bottom:120px;text-align:right;z-index:9;opacity:0;transition:opacity .8s;pointer-events:none}
+#areaPop.show{opacity:1}
+#areaPop span{display:block;font-family:Yellowtail;font-size:clamp(44px,6vw,72px);line-height:1;color:#fff;text-shadow:3px 3px 0 #000,0 0 18px #000}
+#areaPop small{font-family:"Chakra Petch";font-weight:700;letter-spacing:6px;font-size:13px;text-shadow:0 0 4px #000}
+#mission{position:absolute;left:50%;bottom:calc(10.5vh + 78px);transform:translateX(-50%);width:min(760px,90%);text-align:center;z-index:9;font-weight:600;font-size:clamp(15px,1.7vw,21px);text-shadow:0 0 4px #000,2px 2px 2px #000;opacity:0;transition:opacity .4s;pointer-events:none}
+#mission.show{opacity:1}
+#mission b,#subtitle b.y{color:var(--sun)}
+#subtitle{position:absolute;left:50%;bottom:calc(10.5vh + 18px);transform:translateX(-50%);width:min(820px,92%);text-align:center;z-index:9;font-weight:600;font-size:clamp(15px,1.8vw,22px);text-shadow:0 0 4px #000,2px 2px 2px #000;opacity:0;transition:opacity .25s;pointer-events:none}
+#subtitle.show{opacity:1}
+#subtitle .h{color:var(--pink)}#subtitle .g{color:var(--teal)}
+#passed{position:absolute;inset:0;display:grid;place-items:center;z-index:12;pointer-events:none;opacity:0;transition:opacity .4s}
+#passed.show{opacity:1}
+#passed .band{width:100%;text-align:center;background:linear-gradient(90deg,#0000,#000b 20%,#000b 80%,#0000);padding:22px 0}
+#passed h2{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:clamp(48px,7vw,92px);color:var(--gold);-webkit-text-stroke:2px #000;text-shadow:3px 3px 0 #000;letter-spacing:1px}
+#passed.show h2{animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(1.6);opacity:0}}
+#passed p{font-family:"Bebas Neue";font-size:30px;letter-spacing:3px}
+#passed small{font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;color:var(--muted)}
+
+#controls{position:absolute;left:24px;top:calc(10.5vh + 12px);z-index:10;display:flex;flex-direction:column;align-items:flex-start;gap:6px;opacity:0;transition:opacity .5s,top .7s}
+.playing #controls{opacity:1}
+.hud-on #controls{top:66px}
+.ctl-row{display:flex;gap:6px;flex-wrap:wrap}
+.cbtn{font-family:"Chakra Petch";font-weight:700;font-size:12px;letter-spacing:1px;padding:7px 11px;background:#000a;border:1px solid #fff3;border-radius:4px;cursor:pointer;backdrop-filter:blur(6px)}
+.cbtn:hover{background:var(--pink);border-color:#000}
+.cbtn.on{border-color:var(--sun);color:var(--sun)}
+.ctl-help{font-family:"Chakra Petch";font-size:11px;opacity:.65;text-shadow:0 0 3px #000}
+@media(max-width:760px){
+  #radar{width:150px;left:12px;bottom:14px}#minimap{width:150px;height:94px}
+  #hudTR{right:12px;top:60px}.hud-cash{font-size:26px}
+  #speedo{display:none}.ctl-help{display:none}
+  #controls{left:10px}
+  #heroTitle p{font-size:14px}
+}
+
+/* ================= TICKER ================= */
+.ticker{background:var(--sun);color:#000;border-block:4px solid #000;overflow:hidden;white-space:nowrap;font-family:"Bebas Neue";font-size:26px;letter-spacing:2px;padding:8px 0}
+.ticker div{display:inline-block;animation:tick 38s linear infinite;padding-left:100%}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+/* ================= SECTIONS ================= */
+section{padding:100px 0}
+.h2{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:clamp(44px,6.5vw,84px);line-height:.92;margin-bottom:16px}
+.h2 em{font-style:normal;color:var(--pink)}
+.tag{font-family:"Chakra Petch";font-weight:700;letter-spacing:4px;font-size:13px;color:#ff4d4d;margin-bottom:12px;animation:breathe 1.4s infinite}
+
+#footage{background:radial-gradient(ellipse at 70% 40%,#3a1060,var(--ink) 65%)}
+.fg-grid{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
+@media(max-width:900px){.fg-grid{grid-template-columns:1fr;justify-items:center}}
+.fg-copy p{color:var(--muted);max-width:480px;margin-bottom:24px;font-size:17px}
+.fg-meta{display:flex;gap:28px;margin-bottom:30px;flex-wrap:wrap}
+.fg-meta small{display:block;font-family:"Chakra Petch";letter-spacing:3px;font-size:11px;color:var(--muted)}
+.fg-meta b{font-family:"Bebas Neue";font-size:24px;letter-spacing:1px}
+.red{color:#ff4d4d}
+.phone{position:relative;width:min(380px,92vw);height:740px;background:#0d0d10;border:3px solid #2a2a30;border-radius:52px;padding:14px;box-shadow:0 0 0 2px #000,0 40px 90px #000c,0 0 80px #ff2e8844;transform:rotate(2deg);display:flex;flex-direction:column}
+.phone-notch{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#000;border-radius:20px;z-index:3}
+.phone-status{display:flex;justify-content:space-between;padding:14px 26px 8px;font-family:"Chakra Petch";font-weight:700;font-size:13px;background:#000;border-radius:40px 40px 0 0}
+.phone-app{display:flex;justify-content:space-between;align-items:baseline;padding:12px 18px;background:linear-gradient(90deg,var(--pink),var(--orange));color:#000}
+.phone-app b{font-family:Anton;font-size:24px;letter-spacing:1px}
+.phone-app span{font-family:"Chakra Petch";font-weight:700;font-size:12px}
+.phone-screen{flex:1;background:#000;overflow-y:auto;overflow-x:hidden;border-radius:0 0 38px 38px;display:flex;justify-content:center;align-items:flex-start;padding:8px 0}
+.phone-screen .twitter-tweet{margin:0 auto!important}
+.phone-home{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:120px;height:5px;background:#fff8;border-radius:3px}
+.tv-fallback{align-self:center;text-align:center;font-family:"Bebas Neue";font-size:24px;letter-spacing:1px;padding:20px}
+.tv-fallback a{color:var(--sun)}
+
+/* ================= PAUSE MENU ================= */
+#menu{background:linear-gradient(var(--ink),#0c1320 40%,var(--ink));position:relative}
+#menu::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff05 0 1px,#0000 1px 3px);pointer-events:none}
+.pm{position:relative}
+.pm-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.pm-title{font-family:Yellowtail;font-size:clamp(48px,7vw,84px);line-height:.9;text-shadow:3px 3px 0 #000}
+.pm-title span{display:block;font-family:"Chakra Petch";font-weight:700;font-size:14px;letter-spacing:6px;color:var(--muted);margin-left:6px}
+.pm-player{display:flex;align-items:center;gap:12px;font-family:"Chakra Petch"}
+.pm-av{width:52px;height:52px;display:grid;place-items:center;background:linear-gradient(135deg,var(--pink),var(--purple));font-family:Anton;font-size:22px;border:2px solid #fff}
+.pm-player b{font-size:18px;display:block}.pm-player small{font-size:12px;color:var(--muted);letter-spacing:1px}
+.pm-tabs{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
+.pm-tabs button{flex:1;min-width:110px;padding:12px 10px;background:#000a;border:0;border-top:4px solid #ffffff22;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:15px;cursor:pointer;transition:.15s}
+.pm-tabs button:hover{background:#ffffff18}
+.pm-tabs button.on{background:#fff;color:#000;border-top-color:var(--pink)}
+.pm-pane{display:none;background:#000b;border:1px solid #ffffff14;padding:18px;min-height:520px;animation:fadeIn .3s}
+.pm-pane.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}}
+
+.map-wrap{display:grid;grid-template-columns:1fr 300px;gap:18px}
+@media(max-width:900px){.map-wrap{grid-template-columns:1fr}}
+#map{width:100%;height:auto;display:block;border:2px solid #ffffff20}
+#gps{animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-18}}
+.blip{cursor:pointer}
+.blip circle{transition:.15s}
+.blip:hover circle,.blip.on circle{r:17}
+.map-info{background:#ffffff0d;border-left:4px solid var(--pink);padding:18px}
+.map-info small{font-family:"Chakra Petch";letter-spacing:3px;font-size:11px;color:var(--muted)}
+.map-info h3{font-family:Anton;font-weight:400;font-size:30px;text-transform:uppercase;margin:6px 0 10px}
+.map-info p{color:var(--muted);font-size:15px;line-height:1.5}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-family:"Chakra Petch";font-size:13px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:50%;border:2px solid #000;display:inline-block}
+
+.brief{display:grid;grid-template-columns:340px 1fr;gap:18px}
+@media(max-width:900px){.brief{grid-template-columns:1fr}}
+.mlist{list-style:none;display:grid;gap:3px}
+.mlist li{padding:12px 14px;background:#ffffff0a;cursor:pointer;display:flex;justify-content:space-between;font-family:"Chakra Petch";font-weight:700;font-size:15px}
+.mlist li small{font-weight:500;color:var(--muted)}
+.mlist li.on,.mlist li:hover{background:#fff;color:#000}.mlist li.on small,.mlist li:hover small{color:#333}
+.mdetail{background:#ffffff0a;padding:24px;position:relative;overflow:hidden}
+.mdetail h3{font-family:Anton;font-weight:400;font-size:40px;text-transform:uppercase;line-height:1}
+.mdetail .obj{font-family:"Chakra Petch";color:var(--sun);margin:10px 0 14px;font-weight:700}
+.mdetail p{color:var(--muted);line-height:1.6;max-width:560px}
+.mdetail .reward{display:flex;gap:26px;margin-top:20px;font-family:"Chakra Petch"}
+.mdetail .reward b{display:block;font-size:22px;color:#7ce38b}
+.mdetail .num{position:absolute;right:-10px;bottom:-40px;font-family:Anton;font-size:220px;opacity:.06}
+
+.pod{display:grid;grid-template-columns:1fr 300px;gap:18px}
+@media(max-width:900px){.pod{grid-template-columns:1fr}}
+.eplist{list-style:none;display:grid;gap:8px}
+.eplist li{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:14px;background:#ffffff0a;border-left:4px solid transparent;transition:.15s}
+.eplist li:hover{background:#ffffff16;border-left-color:var(--pink)}
+.eplist .n{font-family:Anton;font-size:40px;color:var(--pink);text-align:center}
+.eplist .t{font-family:"Bebas Neue";font-size:26px;letter-spacing:1px}
+.eplist .d{color:var(--muted);font-size:14px}
+.eplist .g{font-family:"Chakra Petch";font-size:12px;color:var(--teal);margin-top:2px}
+.eplist button{font-family:"Bebas Neue";font-size:20px;letter-spacing:1px;padding:8px 16px;background:var(--sun);color:#000;border:2px solid #000;cursor:pointer;box-shadow:4px 4px 0 #000}
+.eplist button:hover{background:var(--pink);color:#fff}
+.stations{background:#ffffff0a;padding:16px}
+.stations h4{font-family:"Chakra Petch";letter-spacing:3px;margin-bottom:12px;color:var(--muted)}
+.stations ul{list-style:none;display:grid;gap:6px}
+.stations li{display:flex;align-items:center;gap:12px;padding:8px;cursor:pointer;font-family:"Bebas Neue";font-size:20px;letter-spacing:1px}
+.stations li:hover{background:#ffffff14}
+.stations li i{width:36px;height:36px;border-radius:50%;border:3px solid #000;display:grid;place-items:center;font-family:Anton;font-style:normal;font-size:11px;color:#000}
+.stations li small{display:block;font-family:"Chakra Petch";font-size:11px;color:var(--muted);letter-spacing:0}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px 40px}
+.stat{padding:10px 0}
+.stat-top{display:flex;justify-content:space-between;font-family:"Chakra Petch";font-weight:700;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
+.stat-top span{color:var(--muted);font-weight:500}
+.segs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.segs i{height:12px;background:#ffffff1a;position:relative;overflow:hidden}
+.segs i b{position:absolute;inset:0 auto 0 0;width:0;background:#fff;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+
+footer{padding:50px 16px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid #ffffff14}
+footer .logo{justify-content:center;margin-bottom:12px;color:var(--paper)}
+
+@media (prefers-reduced-motion:reduce){.grain,.ticker div{animation:none}}
+
+/* ===== 12h drop countdown ===== */
+#drop{position:absolute;top:64px;left:50%;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:12px;padding:9px 18px 9px 14px;background:#000b;border:1px solid #ffffff24;border-left:4px solid var(--pink);border-radius:6px;backdrop-filter:blur(8px);opacity:0;transition:opacity .6s;white-space:nowrap}
+.playing #drop{opacity:1}
+#drop small{display:block;font-family:"Chakra Petch";font-weight:700;font-size:10px;letter-spacing:3px;color:var(--muted)}
+#drop b{font-family:"Bebas Neue";font-size:24px;letter-spacing:1.5px}
+#drop .countdown{color:var(--sun);font-family:"Chakra Petch";font-weight:700;font-size:20px;letter-spacing:1px}
+.drop-dot{width:10px;height:10px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 10px #ff3b3b;animation:breathe 1.2s infinite}
+#passed .tbc{margin-top:14px;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:14px;color:#fff}
+#passed .tbc .countdown{color:var(--sun)}
+.fg-drop{margin:-6px 0 26px;padding:14px 16px;background:#ffffff0d;border-left:4px solid var(--sun);max-width:480px;color:var(--muted)}
+.fg-drop b{color:#fff}
+.fg-drop .big{display:block;margin-top:6px;font-family:"Chakra Petch";font-weight:700;font-size:34px;color:var(--sun);letter-spacing:2px}
+.pod-drop{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding:16px 18px;margin-bottom:14px;background:linear-gradient(90deg,#ff2e8833,#0000);border-left:4px solid var(--pink)}
+.pod-drop small{display:block;font-family:"Chakra Petch";letter-spacing:3px;font-size:11px;color:var(--muted)}
+.pod-drop b{font-family:"Chakra Petch";font-size:36px;color:var(--sun);letter-spacing:2px}
+.pod-drop p{color:var(--muted)}
+.ld-drop{position:absolute;left:50%;transform:translateX(-50%);bottom:64px;font-family:"Chakra Petch";font-weight:700;letter-spacing:3px;font-size:13px;color:#fff}
+.ld-drop .countdown{color:var(--sun)}
+@media(max-width:760px){#drop{top:56px;padding:6px 10px}#drop b{font-size:18px}#drop .countdown{font-size:15px}#radioPop{top:110px}}
+
+.pm-av{background:url(assets/murda-photo.png) center 18%/cover;color:transparent}
+
+/* ===================== GTA COUNTDOWN HERO ===================== */
+#heroTitle{left:0;right:0;top:0;bottom:0;transform:none;max-width:none;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:3vw;padding:12vh clamp(16px,5vw,80px);
+  background:linear-gradient(90deg,#0a0412e6 0%,#0a0412b3 38%,#0a041200 70%)}
+#heroTitle.gone{opacity:0;transform:translateX(-30px);pointer-events:none}
+.ho-left{max-width:640px}
+#heroTitle h1{font-size:clamp(58px,8.6vw,132px);margin:8px 0 18px}
+#heroTitle h1 span{color:var(--pink);margin-left:16%}
+.cut-alert{display:flex;flex-direction:column;gap:6px;border-left:5px solid #ff3b3b;background:#ff3b3b1f;padding:12px 16px;margin-bottom:16px;max-width:520px}
+.cut-alert b{font-family:"Chakra Petch";font-weight:700;letter-spacing:4px;font-size:14px;color:#ff5a5a;animation:breathe 1.4s infinite}
+.cut-alert p{margin:0;font-weight:600;font-size:16px;text-shadow:0 2px 6px #000;max-width:none}
+.cd{display:flex;align-items:flex-start;gap:clamp(6px,1.2vw,16px);margin:6px 0 10px}
+.cd>div{text-align:center}
+.cd b{display:block;font-family:Anton;font-weight:400;font-size:clamp(64px,9vw,128px);line-height:.9;color:#fff;-webkit-text-stroke:2px #000;text-shadow:5px 5px 0 #000,9px 9px 0 var(--pink);font-variant-numeric:tabular-nums;min-width:1.15em}
+.cd small{display:block;margin-top:10px;font-family:"Chakra Petch";font-weight:700;letter-spacing:4px;font-size:12px;color:var(--sun)}
+.cd i{font-style:normal;font-family:Anton;font-size:clamp(48px,6vw,90px);line-height:1;color:var(--sun);text-shadow:4px 4px 0 #000;animation:breathe 1s steps(2) infinite}
+.cd-when{font-family:"Chakra Petch";font-weight:500;letter-spacing:1px;margin-bottom:24px;color:#ddd;text-shadow:0 2px 4px #000}
+.cd-when b{color:#fff}
+.released .cd b{color:var(--sun)}
+.gbtn.ghost{background:#000a;color:#fff;border-color:#fff}
+
+.ho-art{display:flex;justify-content:center;align-items:center;height:100%}
+.art-card{position:relative;width:min(34vw,470px);aspect-ratio:4/5;border:7px solid #000;box-shadow:16px 16px 0 #000,0 30px 80px #000c;transform:rotate(3deg);overflow:hidden;
+  background:linear-gradient(180deg,#3b0f5c 0%,#9c1f78 38%,#ff2e88 58%,#ff8a1f 78%,#ffd23f 100%);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:rotate(2deg) translateY(-10px)}}
+.art-sun{position:absolute;left:50%;top:30%;width:72%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:repeating-linear-gradient(180deg,#ffd23f 0 16px,#ff8a1f 16px 21px);opacity:.85;-webkit-mask:linear-gradient(#000 50%,transparent 95%);mask:linear-gradient(#000 50%,transparent 95%)}
+.art-palms{position:absolute;inset:auto 0 0 0;width:100%;height:60%}
+.art-card .gta-art,.ld-panel .gta-art{position:absolute;left:50%;bottom:0;width:112%;transform:translateX(-50%);
+  filter:drop-shadow(4px 0 0 #000) drop-shadow(-4px 0 0 #000) drop-shadow(0 4px 0 #000) drop-shadow(0 -4px 0 #000) drop-shadow(10px 12px 0 #0007)}
+.gta-art:not([src]){display:none}
+.art-name{position:absolute;left:18px;bottom:18px;background:#fff;color:#000;border:3px solid #000;padding:6px 14px;transform:rotate(-3deg);box-shadow:6px 6px 0 var(--pink)}
+.art-name b{display:block;font-family:Anton;font-weight:400;font-size:clamp(20px,2.2vw,30px);letter-spacing:1px;line-height:1}
+.art-name small{font-family:"Chakra Petch";font-weight:700;font-size:11px;letter-spacing:2px}
+.art-card::after,.ld-panel::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#0000 0 3px,#0001 3px 4px)}
+.ld-art-bg{position:absolute;inset:0;background:linear-gradient(180deg,#3b0f5c,#ff2e88 60%,#ffb347)}
+.ld-panel.p1 .gta-art{width:120%}
+
+/* attract mode = trailer: letterbox, no gameplay HUD, overlay visible */
+.attract #hud,.attract #drop,.attract #controls,.attract #radioPop,.attract #mission,.attract #subtitle,.attract #areaPop{opacity:0!important;pointer-events:none}
+.attract .letterbox{height:7vh}
+
+/* cut-short screen (GTA "wasted" style) */
+#cutShort{position:absolute;inset:0;display:grid;place-items:center;z-index:12;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(ellipse at center,#0000 30%,#000a 100%)}
+#cutShort.show{opacity:1}
+#cutShort .band{width:100%;text-align:center;background:linear-gradient(90deg,#0000,#000c 20%,#000c 80%,#0000);padding:26px 0}
+#cutShort h2{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:clamp(52px,8vw,110px);color:#e3342f;-webkit-text-stroke:2px #000;text-shadow:4px 4px 0 #000;letter-spacing:1px}
+#cutShort.show h2{animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+#cutShort p{font-family:"Chakra Petch";font-weight:700;letter-spacing:4px;font-size:14px;color:#ddd}
+#cutShort .tbc{margin-top:12px;font-family:"Bebas Neue";font-size:34px;letter-spacing:2px}
+#cutShort .countdown{color:var(--sun)}
+#game{transition:filter .6s}
+.wasted #game{filter:grayscale(.8) brightness(.75) contrast(1.1)}
+
+@media(max-width:900px){
+  #heroTitle{grid-template-columns:1fr;padding:80px 16px 9vh;align-content:center;background:linear-gradient(180deg,#0a0412cc,#0a041299)}
+  .ho-art{display:none}
+  .cd b{font-size:clamp(52px,16vw,90px)}
+}
+
+/* ===================== IMMERSIVE MAP ===================== */
+.map-wrap{grid-template-columns:1fr 320px}
+.map-stage{position:relative;aspect-ratio:16/10;min-height:360px;border:2px solid #ffffff26;overflow:hidden;background:#082a46;box-shadow:inset 0 0 0 1px #000,0 20px 50px #0009;user-select:none;touch-action:none}
+.map-stage:fullscreen{aspect-ratio:auto;border:0}
+#mapCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+.map-scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#ffffff06 0 1px,#0000 1px 3px),radial-gradient(ellipse at center,#0000 55%,#000a 100%)}
+.map-hud{position:absolute;z-index:2;font-family:"Chakra Petch";font-weight:700;text-shadow:0 1px 3px #000}
+.map-hud.tl{left:14px;top:12px;pointer-events:none}
+.map-hud.tl b{display:block;font-family:Yellowtail;font-weight:400;font-size:38px;line-height:1;text-shadow:2px 2px 0 #000}
+.map-hud.tl small{font-size:12px;letter-spacing:4px;color:var(--sun)}
+.map-hud.tr{right:12px;top:12px;display:flex;flex-direction:column;gap:6px}
+.map-hud.tr button{width:38px;height:38px;background:#000b;border:1px solid #ffffff3a;color:#fff;font-size:20px;line-height:1;cursor:pointer;border-radius:4px}
+.map-hud.tr button:hover{background:var(--pink);border-color:#000}
+.map-hud.bl{left:14px;bottom:12px;display:flex;align-items:center;gap:12px;pointer-events:none}
+.compass{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#000b;border:2px solid #fff;font-size:14px}
+.scalebar{display:flex;align-items:center;gap:8px;font-size:12px}
+.scalebar i{display:block;width:100px;height:6px;border:2px solid #fff;border-top:0;box-shadow:0 1px 2px #000}
+.map-hud.br{right:14px;bottom:12px;font-size:11px;letter-spacing:2px;opacity:.75;pointer-events:none}
+.map-tip{position:absolute;z-index:3;pointer-events:none;background:#000d;border-left:3px solid var(--pink);padding:5px 10px;font-family:"Chakra Petch";font-weight:700;font-size:13px;white-space:nowrap}
+.map-info .mi-meta{display:flex;justify-content:space-between;font-family:"Chakra Petch";font-weight:700;font-size:13px;letter-spacing:2px;color:var(--sun);margin:-4px 0 10px}
+.legend span{cursor:pointer;padding:4px 8px;border-radius:3px}
+.legend span:hover,.legend span.on{background:#ffffff1a}
+.legend i{width:20px;height:20px;display:inline-grid;place-items:center;font-style:normal;font-size:11px;color:#000;font-family:Anton}
+@media(max-width:900px){.map-stage{aspect-ratio:4/5}.map-hud.br{display:none}}
+
+/* partnership badge */
+.partner{display:inline-block;margin-top:8px;padding:5px 12px;background:#000c;border:1px solid #ffffff40;border-left:4px solid var(--sun);font-family:"Chakra Petch";font-weight:700;font-size:12px;letter-spacing:3px;color:#ddd;text-shadow:none}
+.partner b{color:#fff;letter-spacing:3px}
+.ld-partner{margin:14px 0 0 20%;transform:none}
