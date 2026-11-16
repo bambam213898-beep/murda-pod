@@ -250,9 +250,9 @@ window.EPISODES = [
   document.querySelectorAll('[data-copy-ca]').forEach((el) => el.addEventListener('click', () => copy(el)));
 })();
 
-/* show the pinned CA bar only after scrolling past the hero (the hero already shows the CA) */
+/* show the pinned CA bar whenever the main CA panel is off screen */
 (function () {
-  const hero = document.getElementById('hero');
-  if (!hero || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver((e) => document.body.classList.toggle('in-hero', e[0].isIntersecting), { threshold: 0.35 }).observe(hero);
+  const panel = document.querySelector('.ca-bar');
+  if (!panel || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver((e) => document.body.classList.toggle('in-hero', e[0].isIntersecting), { threshold: 0.6 }).observe(panel);
 })();
