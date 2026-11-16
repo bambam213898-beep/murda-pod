@@ -1161,7 +1161,7 @@ function act(a) {
   if (a === 'radio') { S.station = (S.station + 1) % STATIONS.length; staticBurst(); showRadio(); }
   if (a === 'mute') { A.muted = !A.muted; if (A.master) A.master.gain.value = A.muted ? 0 : 0.55; $('muteBtn').textContent = A.muted ? '🔇' : '🔊'; }
 }
-document.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click', () => act(b.dataset.act)));
+document.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click', (e) => { if (b.tagName === 'A') e.preventDefault(); act(b.dataset.act); }));
 addEventListener('murda:episode', () => { if (!S.started) return; showCutShort(); });
 addEventListener('murda:station', (e) => { if (!S.started) return; S.station = e.detail; staticBurst(); showRadio(); });
 

@@ -6,7 +6,7 @@
 <title>The Real Report — Live From Leonida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Pinyon+Script&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=13">
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -85,7 +85,7 @@
 <nav>
   <a class="logo" href="#hero"><svg class="rr-mini" aria-hidden="true"><use href="#rr"/></svg><b>REAL</b><span>REPORT</span></a>
   <ul>
-    <li><a href="#hero">Gameplay</a></li>
+    <li><a href="#hero" data-act="play">Gameplay</a></li>
     <li><a href="#footage">Footage</a></li>
     <li><a href="#menu">Map</a></li>
     <li><a href="#menu" data-open-tab="pod">The Pod</a></li>
@@ -113,6 +113,12 @@
         <div><b data-cd="s">00</b><small>SECONDS</small></div>
       </div>
       <div class="cd-when">Full video drops <b id="releaseLocal"></b></div>
+      <div class="ca-bar" aria-label="Contract address">
+        <span class="ca-tag">CA</span>
+        <code id="caText">3bFzGq4JgrQHB93Ve18hhB6ioCJgnCYZEc9rWHczpump</code>
+        <button type="button" id="caCopy">COPY</button>
+        <small>Case study mockup · example contract address</small>
+      </div>
       <div class="ht-btns">
         <button class="gbtn" id="remindBtn" type="button">🔔 Remind Me</button>
         <a class="gbtn alt" href="#footage">▶ Watch the Clip</a>
@@ -271,8 +277,8 @@
   <p>The Real Report is presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. Radio dialogue and map locations on this site are fictional.</p>
 </footer>
 
-<script src="page.js?v=10"></script>
+<script src="page.js?v=11"></script>
 <script src="map.js?v=10"></script>
-<script type="module" src="game.js?v=10"></script>
+<script type="module" src="game.js?v=11"></script>
 </body>
 </html>

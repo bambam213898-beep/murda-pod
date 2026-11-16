@@ -236,3 +236,15 @@ window.EPISODES = [
   };
   img.src = 'assets/murda-photo.png';
 })();
+
+/* ---------- contract address copy ---------- */
+(function () {
+  const btn = document.getElementById('caCopy'), ca = document.getElementById('caText');
+  if (!btn || !ca) return;
+  btn.onclick = async () => {
+    try { await navigator.clipboard.writeText(ca.textContent.trim()); }
+    catch { const r = document.createRange(); r.selectNodeContents(ca); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); sel.removeAllRanges(); }
+    btn.textContent = 'COPIED'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('done'); }, 1600);
+  };
+})();
