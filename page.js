@@ -1,6 +1,6 @@
 /* Shared data + non-3D page behaviour. Loaded before game.js. */
-// Full video release: 12 hours after this build (2026-11-15T08:17:00Z). Change this to move the drop.
-window.RELEASE_AT = Date.parse('2026-11-15T08:17:00Z');
+// Full video release: 24 hours after this build (2026-11-17T19:22:00Z). Change this to move the drop.
+window.RELEASE_AT = Date.parse('2026-11-17T19:22:00Z');
 window.countdownText = function () {
   const ms = window.RELEASE_AT - Date.now();
   if (ms <= 0) return 'AVAILABLE NOW';
@@ -71,7 +71,7 @@ window.EPISODES = [
 /* ---------- Loader tips + fallback if 3D fails ---------- */
 (function () {
   const tips = [
-    'THE MURDA POD GOT CUT SHORT. FULL UNCUT VIDEO DROPS IN 12 HOURS.',
+    'THE MURDA POD GOT CUT SHORT. FULL UNCUT VIDEO DROPS IN 24 HOURS.',
     "TIP: Murda doesn't do retakes.",
     'TIP: Press Q while driving to flip radio stations.',
     'TIP: The gator in the parking lot is on payroll. Do not feed him.',
