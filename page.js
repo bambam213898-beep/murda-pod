@@ -237,14 +237,22 @@ window.EPISODES = [
   img.src = 'assets/murda-photo.png';
 })();
 
-/* ---------- contract address copy ---------- */
+/* ---------- contract address: tap any CA element to copy ---------- */
 (function () {
-  const btn = document.getElementById('caCopy'), ca = document.getElementById('caText');
-  if (!btn || !ca) return;
-  btn.onclick = async () => {
-    try { await navigator.clipboard.writeText(ca.textContent.trim()); }
-    catch { const r = document.createRange(); r.selectNodeContents(ca); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); sel.removeAllRanges(); }
-    btn.textContent = 'COPIED'; btn.classList.add('done');
-    setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('done'); }, 1600);
-  };
+  const CA = '3bFzGq4JgrQHB93Ve18hhB6ioCJgnCYZEc9rWHczpump';
+  async function copy(el) {
+    try { await navigator.clipboard.writeText(CA); }
+    catch { const t = document.createElement('textarea'); t.value = CA; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+    el.classList.add('copied');
+    el.querySelectorAll('.ca-copy').forEach((c) => { c.dataset.label ||= c.textContent; c.textContent = 'COPIED ✓'; });
+    setTimeout(() => { el.classList.remove('copied'); el.querySelectorAll('.ca-copy').forEach((c) => (c.textContent = c.dataset.label)); }, 1600);
+  }
+  document.querySelectorAll('[data-copy-ca]').forEach((el) => el.addEventListener('click', () => copy(el)));
+})();
+
+/* show the pinned CA bar only after scrolling past the hero (the hero already shows the CA) */
+(function () {
+  const hero = document.getElementById('hero');
+  if (!hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver((e) => document.body.classList.toggle('in-hero', e[0].isIntersecting), { threshold: 0.35 }).observe(hero);
 })();

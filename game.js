@@ -39,10 +39,11 @@ try {
   document.body.classList.add('no-webgl');
   throw e;
 }
-renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+const MOBILE = matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.25 : 1.6));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.5;
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = !MOBILE; // shadows are the biggest cost on phones
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 4000);
@@ -139,7 +140,7 @@ su.sunPosition.value.copy(sunDir);
 city.add(new THREE.HemisphereLight(0xffc4a0, 0x40205a, 0.85));
 const sun = new THREE.DirectionalLight(0xffa070, 2.8);
 sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.mapSize.set(MOBILE ? 1024 : 2048, MOBILE ? 1024 : 2048);
 Object.assign(sun.shadow.camera, { left: -70, right: 70, top: 70, bottom: -70, near: 1, far: 400 });
 sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.04;
 city.add(sun, sun.target);
@@ -236,7 +237,7 @@ waterNormal.repeat.set(4000 / 14, L / 14);
 let water = null;
 if (waterN) {
   water = new Water(new THREE.PlaneGeometry(4000, 3000), {
-    textureWidth: 512, textureHeight: 512, waterNormals: waterN, sunDirection: sunDir.clone(),
+    textureWidth: MOBILE ? 256 : 512, textureHeight: MOBILE ? 256 : 512, waterNormals: waterN, sunDirection: sunDir.clone(),
     sunColor: 0xffc08a, waterColor: 0x0a2c44, distortionScale: 2.6, fog: true,
   });
   water.rotation.x = -Math.PI / 2; water.position.set(-2063, -0.12, 0);
@@ -1159,6 +1160,8 @@ function act(a) {
   }
   if (a === 'cine') { S.cine = !S.cine; setClasses(); }
   if (a === 'radio') { S.station = (S.station + 1) % STATIONS.length; staticBurst(); showRadio(); }
+  if (a === 'left' || a === 'right') { S.auto = false; player.tx = Math.max(-6, Math.min(6, player.tx + (a === 'left' ? -4 : 4))); }
+  if (a === 'faster' || a === 'slower') { S.auto = false; player.target = Math.max(0, Math.min(62, player.target + (a === 'faster' ? 10 : -10))); }
   if (a === 'mute') { A.muted = !A.muted; if (A.master) A.master.gain.value = A.muted ? 0 : 0.55; $('muteBtn').textContent = A.muted ? '🔇' : '🔊'; }
 }
 document.querySelectorAll('[data-act]').forEach((b) => b.addEventListener('click', (e) => { if (b.tagName === 'A') e.preventDefault(); act(b.dataset.act); }));
@@ -1250,7 +1253,7 @@ function updateCruise(dt) {
   camera.lookAt(lookV);
   if (mode === 'heli') { camera.rotation.z += Math.sin(S.T * 1.3) * 0.004; }
   camera.fov = lerp(camera.fov, fov, snap ? 1 : 0.08); camera.updateProjectionMatrix();
-  bokeh.enabled = mode === 'roadside' || mode === 'low';
+  bokeh.enabled = !MOBILE && (mode === 'roadside' || mode === 'low');
   if (bokeh.enabled) {
     bokeh.uniforms.focus.value = camera.position.distanceTo(car);
     bokeh.uniforms.aperture.value = mode === 'roadside' ? 0.00006 : 0.0005;
