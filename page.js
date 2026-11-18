@@ -177,11 +177,11 @@ window.EPISODES = [
   };
 })();
 
-/* ---------- turn the photo into GTA loading-screen art (cel shading + ink outlines + cut-out) ---------- */
-(function () {
+/* ---------- turn photos into loading-screen art (cel shading + ink outlines + cut-out) ---------- */
+window.murdaArt = function (src, poly, base, done) {
   const img = new Image();
   img.onload = () => {
-    const S = 2, W = 447 * S, k = img.naturalWidth / 447;
+    const S = 2, W = base * S;
     const c = document.createElement('canvas'); c.width = c.height = W; const x = c.getContext('2d');
     x.drawImage(img, 0, 0, W, W);
     const id = x.getImageData(0, 0, W, W), d = id.data;
@@ -189,16 +189,15 @@ window.EPISODES = [
     bx.filter = 'blur(2.2px)'; bx.drawImage(img, 0, 0, W, W);
     const bd = bx.getImageData(0, 0, W, W).data, L = new Float32Array(W * W);
     for (let i = 0; i < W * W; i++) L[i] = (0.299 * bd[i * 4] + 0.587 * bd[i * 4 + 1] + 0.114 * bd[i * 4 + 2]) / 255;
-    // smooth colour too, so flats read as painted
     for (let i = 0; i < W * W; i++) {
       let r = bd[i * 4] / 255, g = bd[i * 4 + 1] / 255, b = bd[i * 4 + 2] / 255;
       const l = 0.299 * r + 0.587 * g + 0.114 * b;
-      const q = Math.max(0.05, Math.floor(l * 7 + 0.42) / 7);              // posterise into flat cel bands (no lift on dark skin)
+      const q = Math.max(0.05, Math.floor(l * 7 + 0.42) / 7);              // flat cel bands
       const ratio = Math.min(3, q / (l + 1e-4)); r *= ratio; g *= ratio; b *= ratio;
-      const m = (r + g + b) / 3; r = m + (r - m) * 1.6; g = m + (g - m) * 1.6; b = m + (b - m) * 1.6; // punchier colour
-      const mid = Math.max(0, 1 - Math.abs(q - 0.35) * 2.5);                     // warm up skin mid-tones
+      const m = (r + g + b) / 3; r = m + (r - m) * 1.6; g = m + (g - m) * 1.6; b = m + (b - m) * 1.6;
+      const mid = Math.max(0, 1 - Math.abs(q - 0.35) * 2.5);
       r *= 1 + 0.14 * mid; g *= 1 + 0.03 * mid; b *= 1 - 0.12 * mid;
-      r += (1 - q) * 0.02; b += (1 - q) * 0.05;                                   // hint of purple in the deepest shadows
+      r += (1 - q) * 0.02; b += (1 - q) * 0.05;
       const px = i % W, py = (i / W) | 0;
       if (px > 0 && py > 0 && px < W - 1 && py < W - 1) {
         const gx = -L[i - W - 1] - 2 * L[i - 1] - L[i + W - 1] + L[i - W + 1] + 2 * L[i + 1] + L[i + W + 1];
@@ -209,16 +208,20 @@ window.EPISODES = [
       d[i * 4] = Math.min(255, r * 255); d[i * 4 + 1] = Math.min(255, g * 255); d[i * 4 + 2] = Math.min(255, b * 255);
     }
     x.putImageData(id, 0, 0);
-    // cut him out of the brick wall
     const mask = document.createElement('canvas'); mask.width = mask.height = W; const mk = mask.getContext('2d');
-    const poly = [[205, 8], [240, 12], [268, 30], [280, 60], [284, 100], [293, 118], [298, 140], [293, 172], [283, 190], [274, 222], [268, 238], [300, 248], [350, 262], [400, 282], [447, 318], [447, 447], [0, 447], [0, 318], [40, 282], [90, 258], [140, 240], [140, 222], [131, 192], [120, 175], [116, 140], [121, 118], [128, 110], [128, 70], [140, 38], [165, 16]];
     mk.filter = 'blur(1.5px)'; mk.fillStyle = '#fff'; mk.beginPath();
     poly.forEach(([px, py], i) => (i ? mk.lineTo(px * S, py * S) : mk.moveTo(px * S, py * S))); mk.closePath(); mk.fill();
     x.globalCompositeOperation = 'destination-in'; x.drawImage(mask, 0, 0);
-    const url = c.toDataURL('image/png');
-    document.querySelectorAll('img.gta-art').forEach((el) => (el.src = url));
+    done(c.toDataURL('image/png'));
   };
-  img.src = 'assets/murda-photo.png';
+  img.src = src;
+};
+(function () {
+  // photo A: white tee, brick wall. photo B: black cap + tinted glasses.
+  const POLY_A = [[205, 8], [240, 12], [268, 30], [280, 60], [284, 100], [293, 118], [298, 140], [293, 172], [283, 190], [274, 222], [268, 238], [300, 248], [350, 262], [400, 282], [447, 318], [447, 447], [0, 447], [0, 318], [40, 282], [90, 258], [140, 240], [140, 222], [131, 192], [120, 175], [116, 140], [121, 118], [128, 110], [128, 70], [140, 38], [165, 16]];
+  const POLY_B = [[150, 40], [200, 22], [262, 19], [322, 28], [366, 58], [381, 108], [388, 166], [398, 202], [389, 214], [390, 248], [395, 262], [391, 300], [384, 330], [381, 352], [394, 382], [420, 420], [440, 468], [452, 500], [0, 500], [0, 432], [58, 388], [100, 372], [118, 348], [104, 330], [92, 300], [87, 262], [95, 245], [109, 240], [107, 200], [111, 150], [120, 96]];
+  window.murdaArt('assets/murda-photo.png', POLY_A, 447, (url) => document.querySelectorAll('img.gta-art:not([data-photo="b"])').forEach((el) => (el.src = url)));
+  window.murdaArt('assets/murda-photo-2.png', POLY_B, 500, (url) => document.querySelectorAll('img.gta-art[data-photo="b"]').forEach((el) => (el.src = url)));
 })();
 
 /* ---------- contract address: tap any CA element to copy ---------- */
