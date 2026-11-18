@@ -282,7 +282,7 @@ const winSets = Array.from({ length: 4 }, windowPair);
 function signTexture(text, color, font = '90px "Bebas Neue"') {
   return canvasTex(1024, 220, (x, w, h) => { x.clearRect(0, 0, w, h); glowText(x, text, w / 2, h / 2 + 6, font, color, 34); }, { wrap: false });
 }
-const signTexts = [['REAL REPORT RADIO 105.9', '#ff2e88'], ['OCEAN STRIP HOTEL', '#12e0c4'], ['THE REAL REPORT', '#ff2e88'], ['LEONIDA LIVE', '#b57bff'], ['RAP UP INN', '#ffb000'], ['VICE BEACH MOTEL', '#3af0ff'], ['GATOR GRILL', '#7cff6b']];
+const signTexts = [['MURDA FM 98.6', '#ff2e88'], ['OCEAN STRIP HOTEL', '#12e0c4'], ['UNCLE MURDA', '#ff2e88'], ['LEONIDA LIVE', '#b57bff'], ['RAP UP INN', '#ffb000'], ['VICE BEACH MOTEL', '#3af0ff'], ['GATOR GRILL', '#7cff6b']];
 const signTexes = signTexts.map(([t, c]) => signTexture(t, c));
 const posterTex = canvasTex(1024, 512, (x, w, h) => {
   const g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#3b0f5c'); g.addColorStop(0.55, '#ff2e88'); g.addColorStop(1, '#ff8a1f');
@@ -298,9 +298,9 @@ const posterTex = canvasTex(1024, 512, (x, w, h) => {
   x.fillStyle = '#140818'; x.fillRect(624, 280, 36, 70); x.fillRect(860, 280, 36, 70);
   x.strokeStyle = '#ffd23f'; x.lineWidth = 10; x.beginPath(); x.arc(760, 400, 80, 0.2, Math.PI - 0.2); x.stroke();
   x.font = '150px Anton'; x.textAlign = 'left'; x.lineWidth = 12; x.strokeStyle = '#000'; x.fillStyle = '#fff';
-  x.strokeText('REAL', 40, 210); x.fillText('REAL', 40, 210);
-  x.strokeText('REPORT', 40, 360); x.fillText('REPORT', 40, 360);
-  x.font = '48px "Bebas Neue"'; x.fillStyle = '#ffd23f'; x.fillText('LIVE FROM LEONIDA  •  105.9', 44, 440);
+  x.strokeText('UNCLE', 40, 210); x.fillText('UNCLE', 40, 210);
+  x.strokeText('MURDA', 40, 360); x.fillText('MURDA', 40, 360);
+  x.font = '48px "Bebas Neue"'; x.fillStyle = '#ffd23f'; x.fillText('NOW IN LEONIDA  •  MURDA FM 98.6', 44, 440);
 }, { wrap: false });
 
 const buildings = [];
@@ -1107,7 +1107,7 @@ function goCruise() {
     renderPass.scene = city; bokeh.scene = city; renderer.toneMappingExposure = 0.5; bloom.strength = 0.45; bloom.threshold = 0.92;
     S.studioZ = player.z - 950;
     ui.sub.classList.remove('show');
-    setTimeout(() => showMission('The pod got <b>cut short</b>. Full video drops soon.', 6000), 900);
+    setTimeout(() => showMission('Heat\'s off. <b>Keep it moving.</b>', 6000), 900);
   });
 }
 
@@ -1146,7 +1146,7 @@ function act(a) {
     hero.classList.remove('attract'); ui.title.classList.add('gone');
     S.cine = false; S.camIdx = 0; S.camT = 0; S.studioZ = player.z - 950;
     showArea('Ocean Strip', 'VICE CITY, LEONIDA'); setTimeout(showRadio, 1200);
-    setTimeout(() => showMission('The pod got <b>cut short</b>. Pull up to the <b>Real Report</b> studio and see what happened.', 6500), 2600);
+    setTimeout(() => showMission('Welcome to <b>Leonida</b>. Get the coupe to <b>Little Brooklyn</b>.', 6500), 2600);
     hero.scrollIntoView({ behavior: 'smooth' }); setClasses();
   }
   if (a === 'attract') {
@@ -1380,7 +1380,7 @@ function updateHud(dt) {
   S.minutes += 0.1 * 1.0;
   const m = Math.floor(S.minutes) % 1440;
   const time = `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
-  ui.clock.textContent = time; $('phoneTime').textContent = time;
+  ui.clock.textContent = time; const pt = $('phoneTime'); if (pt) pt.textContent = time;
   S.cash += Math.random() < 0.3 ? 100 : 0;
   ui.cash.textContent = '$' + S.cash.toLocaleString('en-US');
   $('pmInfo').textContent = `SATURDAY ${time} · BANK $${S.cash.toLocaleString('en-US')}`;

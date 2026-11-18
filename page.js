@@ -13,7 +13,7 @@ setInterval(function tick() {
   return tick;
 }(), 1000);
 window.STATIONS = [
-  { name: 'REAL REPORT RADIO', freq: '105.9', color: '#ff2e88', bpm: 90, root: 55, song: 'The Real Report — Live' },
+  { name: 'MURDA FM', freq: '98.6', color: '#ff2e88', bpm: 90, root: 55, song: 'Uncle Murda — Little Brooklyn Exclusive' },
   { name: 'VICE BEACH FM', freq: '98.3', color: '#12e0c4', bpm: 102, root: 61.7, song: 'Neon Tide — Sunset Mix' },
   { name: 'BROOKLYN 2 LEONIDA', freq: '101.1', color: '#ffd23f', bpm: 86, root: 49, song: 'Flatbush Freestyle' },
   { name: 'GATOR TALK', freq: '88.7', color: '#ff8a1f', bpm: 76, root: 46.2, song: 'Swamp Callers Hour' },
@@ -71,12 +71,12 @@ window.EPISODES = [
 /* ---------- Loader tips + fallback if 3D fails ---------- */
 (function () {
   const tips = [
-    'THE REAL REPORT GOT CUT SHORT. FULL UNCUT VIDEO DROPS IN 24 HOURS.',
+    'NEW PLAYABLE CHARACTER: UNCLE MURDA.',
     "TIP: Murda doesn't do retakes.",
     'TIP: Press Q while driving to flip radio stations.',
     'TIP: The gator in the parking lot is on payroll. Do not feed him.',
     'TIP: Being on the Rap Up list lowers your Respect. Permanently.',
-    'TIP: Press C to switch cameras. Press E to head to the studio.',
+    'TIP: Press C to switch cameras. Tune to Murda FM 98.6 for the exclusives.',
   ];
   let i = 0;
   const el = document.getElementById('ldTip');
@@ -92,14 +92,6 @@ window.EPISODES = [
   }, 20000);
 })();
 
-/* ---------- X video embed ---------- */
-(function () {
-  const fallback = () => { document.querySelector('.twitter-tweet')?.remove(); document.getElementById('tvFallback').hidden = false; };
-  const s = document.createElement('script');
-  s.src = 'https://platform.twitter.com/widgets.js'; s.async = true; s.charset = 'utf-8'; s.onerror = fallback;
-  document.body.appendChild(s);
-  setTimeout(() => { if (!document.querySelector('#tvScreen iframe')) fallback(); }, 12000);
-})();
 
 /* ---------- Pause menu ---------- */
 (function () {
@@ -114,11 +106,11 @@ window.EPISODES = [
 
   // Missions
   const missions = [
-    { t: 'Welcome To Leonida', s: 'COMPLETE', o: 'Drive to the Real Report studio.', d: 'Murda just landed in Vice City with nothing but a mic, a chain and a grudge. Find the studio, set up the booth, and go live before anybody can stop you.', r: ['$25,000', '+10 RESPECT'] },
-    { t: 'The Rap Up', s: 'COMPLETE', o: 'Collect the Rap Up notebook in Little Brooklyn.', d: 'Every year Murda calls out the whole industry. This year the notebook went missing on the flight down. Get it back before it ends up online.', r: ['$40,000', '+25 RESPECT'] },
-    { t: 'Call-In Chaos', s: 'ACTIVE', o: 'Keep the call-in line on air for 6 minutes.', d: 'Leonida\'s residents are calling in nonstop. Screen the callers, keep the show moving and do NOT let Caller #7 back on the line.', r: ['$15,000', '+5 RESPECT'] },
-    { t: 'Beach Beef', s: 'LOCKED', o: 'Confront Jet Ski Jay on the Ocean Strip.', d: 'There was a gesture on the water. Murda says it was disrespect. Jay says it was a wave. Settle it — on the record.', r: ['$20,000', '+15 RESPECT'] },
-    { t: 'Five Stars Freestyle', s: 'LOCKED', o: 'Finish a freestyle with a 5-star wanted level.', d: 'Choppers are circling the studio. Perfect time for a freestyle. Stay on the mic until the last bar.', r: ['$100,000', '+50 RESPECT'] },
+    { t: 'Welcome To Leonida', s: 'COMPLETE', o: 'Pick up the coupe at Vice City International.', d: 'Murda lands in Vice City with a chain, a notebook full of names and no plan to blend in. His coupe is waiting in long-term parking. So is a gator.', r: ['$25,000', '+10 RESPECT'] },
+    { t: 'Little Brooklyn', s: 'COMPLETE', o: 'Take over the block on Flatbush Ave.', d: 'Somebody in Vice City named a whole neighbourhood after home. Murda shows up to see if they deserve it.', r: ['$40,000', '+25 RESPECT'] },
+    { t: 'The Rap Up', s: 'ACTIVE', o: 'Recover the notebook before it leaks.', d: 'The notebook with every name Murda plans to call out went missing on the flight down. Get it back before the whole city reads it.', r: ['$60,000', '+30 RESPECT'] },
+    { t: 'Ocean Strip Run', s: 'LOCKED', o: 'Outrun three cruisers down the Ocean Strip.', d: 'A matte-black coupe at 140 mph on the beach road tends to get attention. Lose the heat before you reach the causeway.', r: ['$35,000', '+20 RESPECT'] },
+    { t: 'Five Stars In The Booth', s: 'LOCKED', o: 'Finish the Murda FM session with a 5-star wanted level.', d: 'Choppers circling the station, cruisers on the block. Perfect time to go live. Stay on air until the last bar.', r: ['$100,000', '+50 RESPECT'] },
   ];
   const ml = document.getElementById('mlist'), md = document.getElementById('mdetail');
   const showM = (i) => {
@@ -129,15 +121,7 @@ window.EPISODES = [
   missions.forEach((m, i) => { const li = document.createElement('li'); li.innerHTML = `${m.t}<small>${m.s}</small>`; li.onclick = () => showM(i); ml.appendChild(li); });
   showM(2);
 
-  // Podcast episodes + stations
-  const el = document.getElementById('eplist');
-  window.EPISODES.forEach((e, i) => {
-    const li = document.createElement('li');
-    const aired = i === 0;
-    li.innerHTML = `<div class="n">${String(i + 1).padStart(2, '0')}</div><div><div class="t">${e.t}</div><div class="d">${e.d}</div><div class="g">${aired ? 'AIRED BEFORE THE CUT' : '🔒 IN THE FULL VIDEO — <span class="countdown"></span>'}</div></div><button ${aired ? '' : 'disabled'}>${aired ? '▶ Watch Clip' : '🔒 Locked'}</button>`;
-    if (aired) li.querySelector('button').onclick = () => document.getElementById('footage').scrollIntoView({ behavior: 'smooth' });
-    el.appendChild(li);
-  });
+  // Radio stations
   const sl = document.getElementById('stlist');
   window.STATIONS.forEach((s, i) => {
     const li = document.createElement('li');
@@ -255,4 +239,15 @@ window.EPISODES = [
   const panel = document.querySelector('.ca-bar');
   if (!panel || !('IntersectionObserver' in window)) return;
   new IntersectionObserver((e) => document.body.classList.toggle('in-hero', e[0].isIntersecting), { threshold: 0.6 }).observe(panel);
+})();
+
+/* ---------- character file: skill bars ---------- */
+(function () {
+  const box = document.getElementById('dzSkills'); if (!box) return;
+  const skills = [['Respect', 100], ['Driving', 84], ['Flow', 97], ['Stamina', 72], ['Stealth', 12], ['Street Cred', 100]];
+  box.innerHTML = skills.map(([n, v]) => `<div class="stat"><div class="stat-top">${n}<span>${v}%</span></div><div class="segs" data-v="${v}">${'<i><b></b></i>'.repeat(5)}</div></div>`).join('');
+  const fill = () => box.querySelectorAll('.segs').forEach((sg) => { const v = +sg.dataset.v; [...sg.children].forEach((seg, k) => { const f = Math.max(0, Math.min(1, (v - k * 20) / 20)); setTimeout(() => (seg.firstChild.style.width = f * 100 + '%'), k * 90); }); });
+  if (!('IntersectionObserver' in window)) return fill();
+  const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { fill(); io.disconnect(); } }, { threshold: 0.3 });
+  io.observe(box);
 })();

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Real Report — Live From Leonida</title>
+<title>Uncle Murda — New Character in Leonida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Pinyon+Script&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20">
+<link rel="stylesheet" href="styles.css?v=22">
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -56,8 +56,8 @@
     <div class="ld-panel p3">
       <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
         <rect width="300" height="400" fill="#1b0b2e"/>
-        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="38" fill="#ff2e88">Real Report</text>
-        <text x="150" y="122" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#12e0c4" letter-spacing="5">ON AIR • 105.9</text>
+        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="40" fill="#ff2e88">Murda FM</text>
+        <text x="150" y="122" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#12e0c4" letter-spacing="5">ON AIR • 98.6</text>
         <g fill="#0a0410">
           <rect x="70" y="300" width="160" height="100"/>
           <path d="M85 210 L120 250 L125 300 L115 300 L110 255 L80 220Z"/>
@@ -69,12 +69,12 @@
     </div>
   </div>
   <div class="ld-title">
-    <div class="ld-name">THE REAL REPORT</div>
-    <div class="ld-sub">Live From Leonida</div>
+    <div class="ld-name">UNCLE MURDA</div>
+    <div class="ld-sub">Brooklyn's Own · Now in Leonida</div>
     <div class="partner ld-partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
   </div>
   <div class="ld-bottom">
-    <div class="ld-drop">FULL VIDEO IN <span class="countdown">12:00:00</span></div>
+    <div class="ld-drop">NEW PLAYABLE CHARACTER</div>
     <div class="ld-tip" id="ldTip">TIP: Murda doesn't do retakes.</div>
     <button id="startBtn" hidden>CLICK TO START</button>
     <div class="ld-spin"><i></i><span id="ldStatus">LOADING</span></div>
@@ -83,12 +83,12 @@
 
 <!-- ============ NAV ============ -->
 <nav>
-  <a class="logo" href="#hero"><svg class="rr-mini" aria-hidden="true"><use href="#rr"/></svg><b>REAL</b><span>REPORT</span></a>
+  <a class="logo" href="#hero"><b>UNCLE</b><span>MURDA</span></a>
   <ul>
-    <li><a href="#hero" data-act="play">Gameplay</a></li>
-    <li><a href="#footage">Footage</a></li>
+    <li><a href="#hero" data-act="play">Play</a></li>
+    <li><a href="#dossier">Character</a></li>
+    <li><a href="#screens">Screens</a></li>
     <li><a href="#menu">Map</a></li>
-    <li><a href="#menu" data-open-tab="pod">The Pod</a></li>
   </ul>
 </nav>
 
@@ -102,39 +102,36 @@
 
   <div id="heroTitle">
     <div class="ho-left">
-      <svg class="rr-hero" role="img" aria-label="The Real Report emblem"><use href="#rr"/></svg>
-      <div class="ht-kick">NOW BROADCASTING ACROSS LEONIDA</div>
+      <div class="ht-kick">NEW CHARACTER · LEONIDA</div>
       <div class="partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
-      <h1>The Real Report<span>Live From Leonida</span></h1>
-      <div class="cut-alert"><b>⚠ PODCAST CUT SHORT</b><p>The live episode got shut down mid-show. The full uncut video drops in</p></div>
-      <div class="cd" aria-live="polite">
-        <div><b data-cd="h">24</b><small>HOURS</small></div><i>:</i>
-        <div><b data-cd="m">00</b><small>MINUTES</small></div><i>:</i>
-        <div><b data-cd="s">00</b><small>SECONDS</small></div>
+      <h1>Uncle Murda<span>Brooklyn's Own</span></h1>
+      <p class="ho-bio">Brooklyn came down south. Murda just landed in Vice City with a chain, a notebook full of names and nothing to lose. Now Leonida has to deal with him.</p>
+      <div class="ho-chips">
+        <div><small>HOME TURF</small><b>Little Brooklyn, Vice City</b></div>
+        <div><small>RIDE</small><b>'87 Vapid Coupe, matte black</b></div>
+        <div><small>WANTED</small><b class="stars-txt">★★★★★<i>★</i></b></div>
       </div>
-      <div class="cd-when">Full video drops <b id="releaseLocal"></b></div>
       <button type="button" class="ca-bar" data-copy-ca aria-label="Copy contract address">
         <span class="ca-tag">CA</span>
         <code class="ca-full">3bFzGq4JgrQHB93Ve18hhB6ioCJgnCYZEc9rWHczpump</code>
         <span class="ca-copy">TAP TO COPY</span>
       </button>
       <div class="ht-btns">
-        <button class="gbtn" id="remindBtn" type="button">🔔 Remind Me</button>
-        <a class="gbtn alt" href="#footage">▶ Watch the Clip</a>
-        <button class="gbtn ghost" data-act="play" type="button">🚗 Free Roam</button>
+        <button class="gbtn" data-act="play" type="button">🚗 Play as Murda</button>
+        <a class="gbtn alt" href="#dossier">📁 Character File</a>
+        <a class="gbtn ghost" href="#menu">🗺 Map</a>
       </div>
     </div>
     <div class="ho-art">
       <div class="art-card">
         <div class="art-sun"></div>
         <svg class="art-palms" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#1b0b2e"><path d="M40 300 C45 230 35 180 62 120" stroke="#1b0b2e" stroke-width="9" fill="none"/><path d="M62 120 C30 100 0 110 -10 140 C20 120 40 122 62 124Z M62 120 C92 90 122 95 132 125 C112 110 87 112 64 124Z M62 120 C52 80 22 70 2 80 C27 85 47 100 60 122Z M62 120 C77 80 107 70 127 80 C102 85 82 100 64 122Z"/><path d="M360 300 C355 240 368 200 345 150" stroke="#1b0b2e" stroke-width="8" fill="none"/><path d="M345 150 C315 130 290 140 280 165 C305 150 325 152 345 154Z M345 150 C375 125 400 130 410 155 C390 142 365 145 347 154Z M345 150 C340 115 312 105 295 112 C318 118 333 130 343 152Z"/><path d="M0 300 V262 H40 V240 H70 V258 H110 V230 H140 V250 H180 V270 H230 V245 H260 V262 H300 V236 H330 V256 H400 V300Z"/></g></svg>
-        <img class="gta-art" alt="Uncle Murda in GTA loading-screen art style">
-        <div class="art-name"><b>UNCLE MURDA</b><small>HOST · THE REAL REPORT</small></div>
+        <img class="gta-art" alt="Uncle Murda in loading-screen art style">
+        <div class="art-name"><b>UNCLE MURDA</b><small>PLAYABLE CHARACTER</small></div>
       </div>
     </div>
   </div>
 
-  <div id="hud">
     <div id="hudTR">
       <div class="hud-time" id="clock">19:42</div>
       <div class="hud-cash" id="cash">$1,250,000</div>
@@ -151,13 +148,12 @@
     <div id="speedo"><b id="mph">0</b><span>MPH</span></div>
   </div>
 
-  <div id="drop"><span class="drop-dot"></span><div><small>THE REAL REPORT — CUT SHORT</small><b>FULL VIDEO IN <span class="countdown">12:00:00</span></b></div></div>
-  <div id="radioPop"><small>RADIO</small><strong id="radioName">REAL REPORT RADIO 105.9</strong><span id="radioSong"></span></div>
+    <div id="radioPop"><small>RADIO</small><strong id="radioName">MURDA FM 98.6</strong><span id="radioSong"></span></div>
   <div id="areaPop"><span id="areaName">Vice Beach</span><small id="areaSub">LEONIDA</small></div>
   <div id="mission"></div>
   <div id="subtitle"></div>
-  <div id="cutShort"><div class="band"><h2>Podcast Cut Short</h2><p>THE STUDIO GOT SHUT DOWN MID-EPISODE</p><div class="tbc">FULL UNCUT VIDEO DROPS IN <span class="countdown">12:00:00</span></div></div></div>
-  <div id="passed"><div class="band"><h2>Mission Passed</h2><p>RESPECT +</p><small id="passedEp"></small><div class="tbc">TO BE CONTINUED — REST OF THE PODCAST AVAILABLE IN <span class="countdown">12:00:00</span></div></div></div>
+  <div id="cutShort"><div class="band"><h2>Five Stars</h2><p>THE WHOLE CITY IS LOOKING FOR MURDA</p><div class="tbc">LOSE THE HEAT · STAY ON THE ROAD</div></div></div></div>
+  <div id="passed"><div class="band"><h2>Mission Passed</h2><p>RESPECT +</p><small id="passedEp"></small><div class="tbc">LEONIDA KNOWS THE NAME NOW</div></div></div></div>
 
   <div class="touch-pad mob-only" aria-label="Driving controls">
     <button type="button" data-act="faster" aria-label="Speed up">▲</button><button type="button" data-act="slower" aria-label="Slow down">▼</button>
@@ -175,36 +171,50 @@
   </div>
 </header>
 
-<div class="ticker"><div>★ THE REAL REPORT — IN PARTNERSHIP WITH ROCKSTAR GAMES ★ THE REAL REPORT GOT CUT SHORT ★ FULL UNCUT VIDEO DROPS IN 24 HOURS ★ LNN BREAKING ★ UNCLE MURDA SPOTTED ON THE OCEAN STRIP WITH A MIC AND NO PERMIT ★ THE RAP UP IS COMING — NOBODY IS SAFE ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ CALL-IN LINE JAMMED FOR 6 HOURS STRAIGHT ★ TUNE TO REAL REPORT RADIO 105.9 ★</div></div>
+<div class="ticker"><div>★ LNN BREAKING ★ UNCLE MURDA TOUCHES DOWN IN VICE CITY ★ MATTE-BLACK COUPE SPOTTED ON THE OCEAN STRIP AT 140 MPH ★ LITTLE BROOKLYN BLOCK PARTY "GETTING OUT OF HAND" ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ GATOR SEEN RIDING SHOTGUN ★ TUNE TO MURDA FM 98.6 ★ NEW PLAYABLE CHARACTER ★</div></div>
 
-<!-- ============ FOOTAGE (VIDEO) ============ -->
-<section id="footage">
-  <div class="wrap fg-grid">
-    <div class="fg-copy">
-      <div class="tag">◉ INCOMING TRANSMISSION</div>
-      <h2 class="h2">Leaked <em>Footage</em></h2>
-      <p>Somebody in the Real Report crew pulled out their phone. Now it's all over Leonida. Watch it before the label makes them take it down.</p>
-      <div class="fg-meta">
-        <div><small>SOURCE</small><b>@KillaKreww</b></div>
-        <div><small>LOCATION</small><b>Real Report Studios</b></div>
-        <div><small>STATUS</small><b class="red">● VIRAL</b></div>
-      </div>
-      <div class="fg-drop">This clip is all that aired before the podcast got cut short. <b>The full uncut video drops in</b><span class="countdown big">12:00:00</span></div>
-      <a class="gbtn" href="https://x.com/KillaKreww/status/2120928826079514634" target="_blank" rel="noopener">Open on X ↗</a>
+<!-- ============ CHARACTER FILE ============ -->
+<section id="dossier">
+  <div class="wrap dz-grid">
+    <div class="dz-photo">
+      <div class="dz-lines" aria-hidden="true"></div>
+      <img class="gta-art" alt="Uncle Murda character art">
+      <div class="dz-plate"><b>LEONIDA PD</b><span>FILE #UM-718</span><small>VICE CITY · LITTLE BROOKLYN</small></div>
     </div>
-    <div class="phone">
-      <div class="phone-notch"></div>
-      <div class="phone-status"><span id="phoneTime">19:42</span><span>▲ ▮▮▮ 87%</span></div>
-      <div class="phone-app"><b>CLIPZ</b><span>Trending in Leonida</span></div>
-      <div class="phone-screen" id="tvScreen">
-        <blockquote class="twitter-tweet" data-theme="dark" data-media-max-width="560" data-conversation="none">
-          <a href="https://twitter.com/KillaKreww/status/2120928826079514634"></a>
-        </blockquote>
-        <div class="tv-fallback" id="tvFallback" hidden>
-          Signal lost.<br><a href="https://x.com/KillaKreww/status/2120928826079514634" target="_blank" rel="noopener">▶ Watch the clip on X</a>
-        </div>
+    <div class="dz-copy">
+      <div class="tag">◉ CHARACTER FILE</div>
+      <h2 class="h2">Uncle <em>Murda</em></h2>
+      <p>Born and raised in East New York. Twenty years of calling names on records and never taking one back. When the heat in Brooklyn got too loud, he moved south, bought the loudest car in Vice City and set up shop in Little Brooklyn. He's not here to blend in.</p>
+      <div class="dz-facts">
+        <div><small>ORIGIN</small><b>East New York, Brooklyn</b></div>
+        <div><small>BASE</small><b>Little Brooklyn, Vice City</b></div>
+        <div><small>CREW</small><b>The Rap Up</b></div>
+        <div><small>RADIO</small><b>Murda FM 98.6</b></div>
       </div>
-      <div class="phone-home"></div>
+      <div class="dz-special">
+        <small>SPECIAL ABILITY</small>
+        <b>The Rap Up</b>
+        <p>Call out a rival by name. Their Respect drops across the whole city, and every crew in Leonida hears about it.</p>
+      </div>
+      <div class="dz-skills" id="dzSkills"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOADING SCREENS ============ -->
+<section id="screens">
+  <div class="wrap">
+    <div class="tag">◉ LOADING SCREENS</div>
+    <h2 class="h2">Welcome to <em>Leonida</em></h2>
+    <div class="sc-grid">
+      <figure class="sc sc-1"><div class="sc-sky"></div><img class="gta-art" alt="Uncle Murda at sunset"><figcaption>OCEAN STRIP · SUNSET</figcaption></figure>
+      <figure class="sc sc-2">
+        <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="scg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".55" stop-color="#ff2e88"/><stop offset="1" stop-color="#2a0f3d"/></linearGradient></defs><rect width="400" height="520" fill="url(#scg2)"/><circle cx="200" cy="250" r="120" fill="#ffd23f" opacity=".85"/><g fill="#140818"><path d="M0 380 V330 H40 V300 H70 V320 H120 V280 H150 V310 H200 V340 H260 V300 H300 V320 H350 V290 H400 V380Z"/><path d="M30 470 L80 430 L190 420 L250 392 L320 392 L380 430 L390 474 L30 480Z"/><circle cx="110" cy="476" r="26"/><circle cx="320" cy="476" r="26"/></g><rect x="30" y="472" width="360" height="6" fill="#ff2e88"/><g fill="#140818"><path d="M60 520 C66 430 52 380 84 300" stroke="#140818" stroke-width="10" fill="none"/><path d="M84 300 C48 276 12 290 0 322 C30 302 56 304 84 306Z M84 300 C120 266 156 272 168 306 C144 290 114 292 86 306Z M84 300 C74 254 40 244 16 256 C46 262 68 280 82 302Z"/></g></svg>
+        <figcaption>'87 VAPID COUPE</figcaption></figure>
+      <figure class="sc sc-3"><div class="sc-cop"></div><img class="gta-art" alt="Uncle Murda wanted"><div class="sc-wanted"><b>WANTED</b><span>★★★★★</span></div><figcaption>FIVE STARS · LITTLE BROOKLYN</figcaption></figure>
+      <figure class="sc sc-4">
+        <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><rect width="400" height="520" fill="#140a26"/><g fill="#0a0414"><path d="M0 520 V250 H60 V180 H110 V230 H160 V140 H220 V210 H270 V160 H330 V240 H400 V520Z"/></g><g fill="#ffcf6a"><rect x="72" y="200" width="6" height="9"/><rect x="90" y="230" width="6" height="9"/><rect x="124" y="250" width="6" height="9"/><rect x="170" y="170" width="6" height="9"/><rect x="188" y="200" width="6" height="9"/><rect x="232" y="230" width="6" height="9"/><rect x="284" y="190" width="6" height="9"/><rect x="300" y="220" width="6" height="9"/><rect x="344" y="260" width="6" height="9"/><rect x="366" y="290" width="6" height="9"/><rect x="72" y="280" width="6" height="9"/><rect x="176" y="260" width="6" height="9"/><rect x="290" y="280" width="6" height="9"/></g><text x="200" y="120" text-anchor="middle" font-family="Permanent Marker" font-size="58" fill="#ff2e88" style="filter:drop-shadow(0 0 12px #ff2e88)">Murda FM</text><text x="200" y="160" text-anchor="middle" font-family="Bebas Neue" font-size="30" letter-spacing="6" fill="#12e0c4">98.6 · ON AIR</text><rect x="120" y="330" width="160" height="190" fill="#05020a"/><rect x="150" y="360" width="100" height="70" fill="#ff2e88" opacity=".75"/><rect x="120" y="326" width="160" height="6" fill="#12e0c4"/></svg>
+        <figcaption>MURDA FM · LITTLE BROOKLYN</figcaption></figure>
     </div>
   </div>
 </section>
@@ -214,7 +224,7 @@
   <div class="wrap">
     <div class="pm">
       <div class="pm-head">
-        <div class="pm-title">Real Report<span>LEONIDA</span></div>
+        <div class="pm-title">Uncle Murda<span>LEONIDA</span></div>
         <div class="pm-player">
           <div class="pm-av">UM</div>
           <div><b>UNCLE MURDA</b><small id="pmInfo">SATURDAY 19:42 · BANK $1,250,000</small></div>
@@ -223,7 +233,7 @@
       <div class="pm-tabs" role="tablist">
         <button class="on" data-tab="map">Map</button>
         <button data-tab="brief">Brief</button>
-        <button data-tab="pod">Podcast</button>
+        <button data-tab="pod">Radio</button>
         <button data-tab="stats">Stats</button>
       </div>
 
@@ -240,8 +250,8 @@
           </div>
           <div class="map-info" id="mapInfo">
             <small>WAYPOINT</small>
-            <h3>Real Report Studios</h3>
-            <p>Where the show happens. Pull up, put the headphones on, and don't say nothing slick.</p>
+            <h3>Murda's Spot</h3>
+            <p>Little Brooklyn safehouse. Pull up, park the coupe and don't say nothing slick.</p>
           </div>
         </div>
         <div class="legend" id="legend"></div>
@@ -255,12 +265,7 @@
       </div>
 
       <div class="pm-pane" id="pane-pod">
-        <div class="pod-drop">
-          <div><small>FULL VIDEO DROPS IN</small><b class="countdown">12:00:00</b></div>
-          <p>The Real Report, in partnership with Rockstar Games. The live episode got cut short. Only the first segment aired — everything else is in the full uncut video.</p>
-        </div>
         <div class="pod">
-          <ul class="eplist" id="eplist"></ul>
           <div class="stations">
             <h4>Stations</h4>
             <ul id="stlist"></ul>
@@ -281,12 +286,12 @@
 
 <footer>
   <button type="button" class="ca-foot" data-copy-ca aria-label="Copy contract address"><span class="ca-tag">CA</span> <code>3bFzGq4JgrQHB93Ve18hhB6ioCJgnCYZEc9rWHczpump</code> <span class="ca-copy">COPY</span></button>
-  <div class="logo"><svg class="rr-mini" aria-hidden="true"><use href="#rr"/></svg><b>REAL</b><span>REPORT</span></div>
-  <p>The Real Report is presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. Radio dialogue and map locations on this site are fictional.</p>
+  <div class="logo"><b>UNCLE</b><span>MURDA</span></div>
+  <p>Uncle Murda, presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. All artwork on this site is original fan-style art; radio, missions and map locations are fictional.</p>
 </footer>
 
-<script src="page.js?v=14"></script>
-<script src="map.js?v=10"></script>
-<script type="module" src="game.js?v=12"></script>
+<script src="page.js?v=15"></script>
+<script src="map.js?v=11"></script>
+<script type="module" src="game.js?v=14"></script>
 </body>
 </html>

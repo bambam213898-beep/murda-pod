@@ -519,3 +519,54 @@ body.in-hero #caDock{opacity:0;pointer-events:none;transform:translate(-50%,20px
   .ht-btns{flex-wrap:nowrap}
   .ht-btns .gbtn{font-size:21px;padding:9px 20px}
 }
+
+/* ===== v21: Uncle Murda as an in-game character ===== */
+.pod{grid-template-columns:1fr}
+.ho-bio{max-width:520px;font-size:clamp(15px,1.3vw,18px);line-height:1.5;color:#f3e9ff;text-shadow:0 2px 8px #000;margin:4px 0 16px}
+.ho-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.ho-chips div{background:#000c;border:2px solid #000;border-left:4px solid var(--pink);padding:8px 12px;min-width:140px}
+.ho-chips small{display:block;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:11px;color:var(--teal)}
+.ho-chips b{font-family:"Bebas Neue";font-size:22px;letter-spacing:1px;color:#fff;font-weight:400}
+.stars-txt{color:#fff!important;letter-spacing:2px}.stars-txt i{font-style:normal;color:#ffffff40}
+
+#dossier{background:radial-gradient(ellipse at 20% 30%,#3a1060,var(--ink) 65%)}
+.dz-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.dz-photo{position:relative;aspect-ratio:4/5;background:#14101e;border:7px solid #000;box-shadow:16px 16px 0 #000,16px 16px 0 3px var(--pink);overflow:hidden}
+.dz-lines{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0 46px,#3a3150 46px 49px)}
+.dz-photo .gta-art{position:absolute;left:50%;bottom:16%;width:92%;transform:translateX(-50%);filter:drop-shadow(8px 8px 0 #000)}
+.dz-plate{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);background:#0c0913;border:3px solid #fff;padding:8px 20px;text-align:center;min-width:62%}
+.dz-plate b{display:block;font-family:Anton;letter-spacing:4px;font-size:22px;color:#fff}
+.dz-plate span{display:block;font-family:"Chakra Petch";font-weight:700;color:var(--sun);font-size:20px;letter-spacing:2px}
+.dz-plate small{font-family:"Chakra Petch";color:var(--muted);letter-spacing:2px;font-size:11px}
+.dz-copy p{color:#e8dcf5;line-height:1.6;font-size:17px;max-width:620px}
+.dz-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0}
+.dz-facts div{background:#ffffff0d;border-left:4px solid var(--teal);padding:10px 14px}
+.dz-facts small,.dz-special small{display:block;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:11px;color:var(--teal)}
+.dz-facts b{font-family:"Bebas Neue";font-size:22px;letter-spacing:1px;font-weight:400}
+.dz-special{background:linear-gradient(90deg,#ff2e8833,transparent);border-left:4px solid var(--pink);padding:14px 16px;margin-bottom:18px}
+.dz-special b{display:block;font-family:Anton;font-weight:400;font-size:30px;text-transform:uppercase;color:var(--sun);-webkit-text-stroke:1px #000}
+.dz-special p{margin:4px 0 0;font-size:15px}
+.dz-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
+
+#screens{background:var(--ink)}
+.sc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:10px}
+.sc{position:relative;margin:0;aspect-ratio:4/5.2;border:6px solid #000;box-shadow:10px 10px 0 #000;overflow:hidden;background:#1b0b2e;transition:transform .2s}
+.sc:hover{transform:translateY(-6px) rotate(-.6deg)}
+.sc svg{position:absolute;inset:0;width:100%;height:100%}
+.sc figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(transparent,#000d);font-family:"Bebas Neue";letter-spacing:2px;font-size:20px;color:#fff}
+.sc-1 .sc-sky{position:absolute;inset:0;background:linear-gradient(#2a0a45,#7a1b6b 40%,#ff2e88 65%,#ff8a1f 85%,#ffd23f)}
+.sc-1 .sc-sky::after{content:"";position:absolute;left:50%;top:38%;width:70%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:repeating-linear-gradient(#ffe766 0 14px,transparent 14px 18px);opacity:.8}
+.sc .gta-art{position:absolute;left:50%;bottom:0;width:120%;transform:translateX(-50%);filter:drop-shadow(6px 6px 0 #000)}
+.sc-3{background:radial-gradient(circle at 15% 20%,#ff1f3d,transparent 55%),radial-gradient(circle at 85% 20%,#2f6bff,transparent 55%),#140a26}
+.sc-3 .gta-art{filter:drop-shadow(6px 6px 0 #000) saturate(.9)}
+.sc-wanted{position:absolute;top:12px;left:0;right:0;text-align:center}
+.sc-wanted b{display:block;font-family:Anton;font-size:clamp(34px,3.6vw,52px);font-weight:400;color:#fff;-webkit-text-stroke:2px #000;text-shadow:4px 4px 0 #000;letter-spacing:2px}
+.sc-wanted span{font-size:24px;color:#fff;letter-spacing:4px;text-shadow:2px 2px 0 #000}
+@media(max-width:980px){.dz-grid{grid-template-columns:1fr}.dz-photo{max-width:420px;margin:0 auto;width:100%}.sc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+  .ho-chips div{min-width:0;flex:1 1 44%}
+  .dz-facts,.dz-skills{grid-template-columns:1fr}
+  .sc-grid{gap:12px}.sc figcaption{font-size:16px}
+  section{padding:64px 0}
+}
+@media(max-width:760px){#hero.attract #hudTR{display:none}}
