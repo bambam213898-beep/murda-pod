@@ -227,7 +227,7 @@ window.murdaArt = function (src, poly, base, done) {
 
 /* ---------- contract address: tap any CA element to copy ---------- */
 (function () {
-  const CA = '3bFzGq4JgrQHB93Ve18hhB6ioCJgnCYZEc9rWHczpump';
+  const CA = 'CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump';
   async function copy(el) {
     try { await navigator.clipboard.writeText(CA); }
     catch { const t = document.createElement('textarea'); t.value = CA; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
