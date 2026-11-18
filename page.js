@@ -13,7 +13,7 @@ setInterval(function tick() {
   return tick;
 }(), 1000);
 window.STATIONS = [
-  { name: 'MURDA FM', freq: '98.6', color: '#ff2e88', bpm: 90, root: 55, song: 'Uncle Murda — Little Brooklyn Exclusive' },
+  { name: 'MURDA FM', freq: '98.6', color: '#ff2e88', bpm: 90, root: 55, song: 'The Murda Hour — coming soon' },
   { name: 'VICE BEACH FM', freq: '98.3', color: '#12e0c4', bpm: 102, root: 61.7, song: 'Neon Tide — Sunset Mix' },
   { name: 'BROOKLYN 2 LEONIDA', freq: '101.1', color: '#ffd23f', bpm: 86, root: 49, song: 'Flatbush Freestyle' },
   { name: 'GATOR TALK', freq: '88.7', color: '#ff8a1f', bpm: 76, root: 46.2, song: 'Swamp Callers Hour' },
@@ -72,6 +72,7 @@ window.EPISODES = [
 (function () {
   const tips = [
     'NEW PLAYABLE CHARACTER: UNCLE MURDA.',
+    'COMING SOON: THE MURDA HOUR, NIGHTLY ON MURDA FM 98.6.',
     "TIP: Murda doesn't do retakes.",
     'TIP: Press Q while driving to flip radio stations.',
     'TIP: The gator in the parking lot is on payroll. Do not feed him.',
@@ -253,4 +254,14 @@ window.murdaArt = function (src, poly, base, done) {
   if (!('IntersectionObserver' in window)) return fill();
   const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { fill(); io.disconnect(); } }, { threshold: 0.3 });
   io.observe(box);
+})();
+
+/* ---------- radio show: "Tune to 98.6" starts the drive on Murda FM ---------- */
+(function () {
+  document.querySelectorAll('[data-tune]').forEach((b) => b.addEventListener('click', () => {
+    const play = document.querySelector('#heroTitle [data-act="play"]');
+    document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => play && play.click(), 450);
+    setTimeout(() => window.dispatchEvent(new CustomEvent('murda:station', { detail: 0 })), 1800); // switch once the drive has started
+  }));
 })();

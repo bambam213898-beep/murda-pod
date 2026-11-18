@@ -570,3 +570,33 @@ body.in-hero #caDock{opacity:0;pointer-events:none;transform:translate(-50%,20px
   section{padding:64px 0}
 }
 @media(max-width:760px){#hero.attract #hudTR{display:none}}
+
+/* ===== v23: The Murda Hour radio show ===== */
+#radio{background:radial-gradient(ellipse at 80% 40%,#3a1060,var(--ink) 65%)}
+.rd-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+.rd-copy p{color:#e8dcf5;line-height:1.6;font-size:17px;max-width:600px}
+.rd-copy p b{color:var(--pink)}
+.rd-segs{list-style:none;display:grid;gap:10px;margin:22px 0;padding:0}
+.rd-segs li{display:flex;gap:14px;align-items:center;background:#ffffff0d;border-left:4px solid var(--pink);padding:10px 14px}
+.rd-segs i{font-style:normal;font-family:Anton;font-size:30px;color:var(--pink);min-width:40px}
+.rd-segs b{display:block;font-family:"Bebas Neue";font-size:24px;letter-spacing:1px;font-weight:400}
+.rd-segs small{display:block;color:var(--muted);font-size:14px}
+.rd-stereo{background:linear-gradient(160deg,#2a2236,#120c1c);border:6px solid #000;box-shadow:14px 14px 0 #000,14px 14px 0 3px var(--teal);padding:22px;border-radius:14px}
+.rd-screen{background:#050308;border:3px solid #000;border-radius:8px;padding:18px;box-shadow:inset 0 0 40px #ff2e8833}
+.rd-top{display:flex;justify-content:space-between;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:13px;color:var(--teal)}
+.rd-live{color:#ff4d5e;animation:breathe 1.4s infinite}
+.rd-freq{font-family:Anton;font-size:clamp(70px,8vw,112px);line-height:1;color:var(--pink);text-shadow:0 0 18px #ff2e88aa;margin-top:6px}
+.rd-name{font-family:"Permanent Marker";font-size:clamp(28px,3vw,40px);color:#fff;text-shadow:0 0 12px #ff2e88}
+.rd-show{font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:12px;color:var(--sun);margin-top:4px}
+.rd-eq{display:flex;align-items:flex-end;gap:4px;height:46px;margin-top:14px}
+.rd-eq i{flex:1;background:linear-gradient(var(--pink),var(--teal));height:30%;animation:eq 1s ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes eq{to{height:100%}}
+@media (prefers-reduced-motion:reduce){.rd-eq i{animation:none;height:60%}}
+.rd-dial{position:relative;margin:18px 0 10px;height:46px;background:#0b0712;border:2px solid #000;border-radius:6px}
+.rd-scale{display:flex;justify-content:space-between;padding:12px 12px;font-family:"Chakra Petch";font-size:12px;color:#8a7da0}
+.rd-needle{position:absolute;top:4px;bottom:4px;left:52%;width:3px;background:#ff1f3d;box-shadow:0 0 10px #ff1f3d}
+.rd-knobs{display:flex;justify-content:space-between;margin:6px 4px 14px}
+.rd-knobs b{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#5a5068,#16101f);border:3px solid #000;box-shadow:0 4px 0 #000}
+.rd-when small{display:block;font-family:"Chakra Petch";font-weight:700;letter-spacing:2px;font-size:11px;color:var(--teal)}
+.rd-when b{font-family:"Bebas Neue";font-size:26px;letter-spacing:2px;font-weight:400}
+@media(max-width:980px){.rd-grid{grid-template-columns:1fr}.rd-stereo{max-width:520px;width:100%;margin:0 auto}}
