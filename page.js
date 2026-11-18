@@ -1,11 +1,11 @@
 /* Shared data + non-3D page behaviour. Loaded before game.js. */
-// Full video release: 24 hours after this build (2026-11-17T19:22:00Z). Change this to move the drop.
-window.RELEASE_AT = Date.parse('2026-11-17T19:22:00Z');
+// GTA VI launch: Nov 19, 2026, midnight US Eastern. Change this one line to move the countdown.
+window.RELEASE_AT = Date.parse('2026-11-19T00:00:00-05:00');
 window.countdownText = function () {
   const ms = window.RELEASE_AT - Date.now();
-  if (ms <= 0) return 'AVAILABLE NOW';
-  const t = Math.floor(ms / 1000), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), sec = t % 60;
-  return [h, m, sec].map((n) => String(n).padStart(2, '0')).join(':');
+  if (ms <= 0) return 'OUT NOW';
+  const t = Math.floor(ms / 1000), d = Math.floor(t / 86400), h = Math.floor((t % 86400) / 3600), m = Math.floor((t % 3600) / 60), sec = t % 60;
+  return (d ? d + 'D ' : '') + [h, m, sec].map((n) => String(n).padStart(2, '0')).join(':');
 };
 setInterval(function tick() {
   const txt = window.countdownText();
@@ -153,27 +153,27 @@ window.EPISODES = [
   const pad = (n) => String(n).padStart(2, '0');
   function tick() {
     const ms = Math.max(0, window.RELEASE_AT - Date.now()), t = Math.floor(ms / 1000);
-    const v = { h: Math.floor(t / 3600), m: Math.floor((t % 3600) / 60), s: t % 60 };
-    document.querySelectorAll('[data-cd]').forEach((el) => (el.textContent = pad(v[el.dataset.cd])));
+    const v = { d: Math.floor(t / 86400), h: Math.floor((t % 86400) / 3600), m: Math.floor((t % 3600) / 60), s: t % 60 };
+    document.querySelectorAll('[data-cd]').forEach((el) => (el.textContent = el.dataset.cd === 'd' ? v.d : pad(v[el.dataset.cd])));
     if (ms <= 0) document.body.classList.add('released');
   }
   tick(); setInterval(tick, 1000);
   const when = new Date(window.RELEASE_AT);
   const el = document.getElementById('releaseLocal');
-  if (el) el.textContent = when.toLocaleString([], { weekday: 'long', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+  if (el) el.textContent = when.toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
   const stamp = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const btn = document.getElementById('remindBtn');
   if (btn) btn.onclick = () => {
-    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Real Report Radio//Countdown//EN', 'BEGIN:VEVENT',
-      'UID:real-report-full-video-' + window.RELEASE_AT + '@murdaradio', 'DTSTAMP:' + stamp(Date.now()),
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Uncle Murda//GTA VI Countdown//EN', 'BEGIN:VEVENT',
+      'UID:gta-vi-launch-' + window.RELEASE_AT + '@rapup2021.io', 'DTSTAMP:' + stamp(Date.now()),
       'DTSTART:' + stamp(window.RELEASE_AT), 'DTEND:' + stamp(window.RELEASE_AT + 3600e3),
-      'SUMMARY:The Real Report — full uncut video drops', 'DESCRIPTION:The podcast got cut short. The full uncut video is out now.',
-      'URL:https://x.com/KillaKreww/status/2120928826079514634',
-      'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:Real Report full video drops in 10 minutes', 'END:VALARM',
+      'SUMMARY:GTA VI launches: play as Uncle Murda', 'DESCRIPTION:GTA VI is out. Uncle Murda is playable day one.',
+      'URL:https://rapup2021.io',
+      'BEGIN:VALARM', 'TRIGGER:-PT10M', 'ACTION:DISPLAY', 'DESCRIPTION:GTA VI launches in 10 minutes', 'END:VALARM',
       'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    a.download = 'real-report-full-video.ics'; a.click();
+    a.download = 'gta-vi-launch.ics'; a.click();
     btn.textContent = '✔ Reminder Saved';
   };
 })();

@@ -1143,14 +1143,14 @@ function act(a) {
   if (a === 'studio') showCutShort();
   if (a === 'play') {
     if (S.mode !== 'cruise') goCruise();
-    hero.classList.remove('attract'); ui.title.classList.add('gone');
+    hero.classList.remove('attract'); hero.classList.add('driving'); ui.title.classList.add('gone');
     S.cine = false; S.camIdx = 0; S.camT = 0; S.studioZ = player.z - 950;
     showArea('Ocean Strip', 'VICE CITY, LEONIDA'); setTimeout(showRadio, 1200);
     setTimeout(() => showMission('Welcome to <b>Leonida</b>. Get the coupe to <b>Little Brooklyn</b>.', 6500), 2600);
     hero.scrollIntoView({ behavior: 'smooth' }); setClasses();
   }
   if (a === 'attract') {
-    hero.classList.add('attract'); ui.title.classList.remove('gone');
+    hero.classList.add('attract'); hero.classList.remove('driving'); ui.title.classList.remove('gone');
     S.cine = true; S.auto = true; ui.mission.classList.remove('show'); setClasses();
   }
   if (a === 'cam') {

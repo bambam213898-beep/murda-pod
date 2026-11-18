@@ -6,7 +6,7 @@
 <title>Uncle Murda — New Character in Leonida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Pinyon+Script&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=24">
+<link rel="stylesheet" href="styles.css?v=27">
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -74,7 +74,7 @@
     <div class="partner ld-partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
   </div>
   <div class="ld-bottom">
-    <div class="ld-drop">NEW PLAYABLE CHARACTER</div>
+    <div class="ld-drop">GTA VI LAUNCHES IN <span class="countdown">--</span></div>
     <div class="ld-tip" id="ldTip">TIP: Murda doesn't do retakes.</div>
     <button id="startBtn" hidden>CLICK TO START</button>
     <div class="ld-spin"><i></i><span id="ldStatus">LOADING</span></div>
@@ -112,6 +112,17 @@
         <div><small>RIDE</small><b>'87 Vapid Coupe, matte black</b></div>
         <div><small>RADIO SHOW</small><b>Murda FM 98.6 · Soon</b></div>
         <div><small>WANTED</small><b class="stars-txt">★★★★★<i>★</i></b></div>
+      </div>
+      <div class="vi-box">
+        <div class="vi-head"><b>GTA VI LAUNCHES IN</b><span>Uncle Murda playable day one</span></div>
+        <div class="cd vi-cd" aria-live="polite">
+          <div><b data-cd="d">0</b><small>DAYS</small></div><i>:</i>
+          <div><b data-cd="h">00</b><small>HRS</small></div><i>:</i>
+          <div><b data-cd="m">00</b><small>MIN</small></div><i>:</i>
+          <div><b data-cd="s">00</b><small>SEC</small></div>
+        </div>
+        <div class="vi-out">OUT NOW · <button type="button" data-act="play">PLAY AS MURDA →</button></div>
+        <div class="vi-foot"><span class="cd-when">Out <b id="releaseLocal">Nov 19</b></span><button class="vi-remind" id="remindBtn" type="button">🔔 Remind me</button></div>
       </div>
       <button type="button" class="ca-bar" data-copy-ca aria-label="Copy contract address">
         <span class="ca-tag">CA</span>
@@ -173,7 +184,7 @@
   </div>
 </header>
 
-<div class="ticker"><div>★ LNN BREAKING ★ UNCLE MURDA TOUCHES DOWN IN VICE CITY ★ MATTE-BLACK COUPE SPOTTED ON THE OCEAN STRIP AT 140 MPH ★ LITTLE BROOKLYN BLOCK PARTY "GETTING OUT OF HAND" ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ GATOR SEEN RIDING SHOTGUN ★ UNCLE MURDA GETTING HIS OWN RADIO SHOW: THE MURDA HOUR, NIGHTLY ON MURDA FM 98.6 ★ NEW PLAYABLE CHARACTER ★</div></div>
+<div class="ticker"><div>★ LNN BREAKING ★ UNCLE MURDA TOUCHES DOWN IN VICE CITY ★ MATTE-BLACK COUPE SPOTTED ON THE OCEAN STRIP AT 140 MPH ★ LITTLE BROOKLYN BLOCK PARTY "GETTING OUT OF HAND" ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ GATOR SEEN RIDING SHOTGUN ★ UNCLE MURDA GETTING HIS OWN RADIO SHOW: THE MURDA HOUR, NIGHTLY ON MURDA FM 98.6 ★ GTA VI LAUNCHES NOV 19: UNCLE MURDA PLAYABLE DAY ONE ★ NEW PLAYABLE CHARACTER ★</div></div>
 
 <!-- ============ CHARACTER FILE ============ -->
 <section id="dossier">
@@ -333,8 +344,8 @@
   <p>Uncle Murda, presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. All artwork on this site is original fan-style art; radio, missions and map locations are fictional.</p>
 </footer>
 
-<script src="page.js?v=20"></script>
+<script src="page.js?v=21"></script>
 <script src="map.js?v=11"></script>
-<script type="module" src="game.js?v=14"></script>
+<script type="module" src="game.js?v=15"></script>
 </body>
 </html>
