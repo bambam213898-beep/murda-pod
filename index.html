@@ -110,7 +110,7 @@ h1 .flick{animation:flick 7s infinite}
     </div>
   </section>
 
-  <button type="button" class="ca fade" style="animation-delay:1.6s" id="ca" aria-label="Copy contract address"><i>CA</i><code>CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump</code><span>COPY</span></button>
+  <button type="button" class="ca fade" style="animation-delay:1.6s" id="ca" aria-label="Copy contract address"><i>CA</i><code>GJ6GXjW66Q23haR8G2rXhgjfTDkBWc6ENCbhikASpump</code><span>COPY</span></button>
 
 </main>
 <div class="hint" id="hint">MOVE YOUR LIGHT</div>
@@ -172,7 +172,7 @@ requestAnimationFrame(frame);
 
 /* ---------- copy CA ---------- */
 const toast = (m) => { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 1800); };
-document.getElementById('ca').onclick = () => { const v = 'CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump'; navigator.clipboard?.writeText(v).then(() => toast('CA copied'), () => toast(v)); };
+document.getElementById('ca').onclick = () => { const v = 'GJ6GXjW66Q23haR8G2rXhgjfTDkBWc6ENCbhikASpump'; navigator.clipboard?.writeText(v).then(() => toast('CA copied'), () => toast(v)); };
 
 /* ---------- ambient drone (generated, no files) ---------- */
 let ac = null, master = null;
