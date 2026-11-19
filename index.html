@@ -3,349 +3,194 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Uncle Murda — New Character in Leonida</title>
+<title>Find Murda — GTA VI Easter Egg</title>
+<meta name="description" content="GTA VI is out now. Somewhere in Leonida, Uncle Murda is hiding. The first to find him takes the reward.">
+<meta name="theme-color" content="#05030a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Pinyon+Script&family=Bebas+Neue&family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&family=Permanent+Marker&family=Yellowtail&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=27">
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-} }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05030a;--txt:#efe9f7;--mut:#9a90ad;--dim:#5f566f;--pink:#ff3d8b;--violet:#8a5cff;--teal:#2de2c8;--gold:#ffcf6b}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+/* the hidden portrait, only visible where the light is */
+.ghost{position:fixed;inset:0;z-index:1;pointer-events:none;display:grid;place-items:center}
+.ghost img{height:min(92vh,980px);max-width:none;opacity:.72;filter:grayscale(1) contrast(1.35) brightness(.9) sepia(.4) hue-rotate(250deg) saturate(2.4);mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(circle var(--r,190px) at var(--x,50%) var(--y,45%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);mask-image:radial-gradient(circle var(--r,190px) at var(--x,50%) var(--y,45%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%)}
+.veil{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 120%,rgba(255,61,139,.18),transparent 55%),radial-gradient(ellipse at 50% -20%,rgba(138,92,255,.16),transparent 60%);}
+.grain{position:fixed;inset:-50%;z-index:3;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+main{position:relative;z-index:5;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 20px 60px}
+.top{position:fixed;top:0;left:0;right:0;z-index:6;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,4vw,40px)}
+.out{display:inline-flex;align-items:center;gap:10px;font:500 13px "JetBrains Mono";letter-spacing:.22em;color:#d9ffef;padding:8px 14px;border:1px solid rgba(45,226,200,.35);border-radius:999px;background:rgba(5,3,10,.55);backdrop-filter:blur(6px)}
+.top{background:linear-gradient(#05030a 20%,rgba(5,3,10,0))}
+.out i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.snd{font:500 12px "JetBrains Mono";letter-spacing:.18em;color:var(--mut);background:none;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 14px;cursor:pointer}
+.snd.on{color:var(--txt);border-color:rgba(255,61,139,.5);box-shadow:0 0 20px -6px var(--pink)}
+
+.sigil{width:min(250px,52vw);height:auto;margin-bottom:26px;filter:drop-shadow(0 0 30px rgba(255,61,139,.45))}
+.sigil .spin{transform-origin:200px 200px;animation:spin 60s linear infinite}
+.sigil .spin2{transform-origin:200px 200px;animation:spin 90s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eyebrow{font:500 13px "JetBrains Mono";letter-spacing:.42em;color:var(--mut);text-transform:uppercase}
+h1{font-family:Cinzel,serif;font-weight:900;font-size:clamp(46px,9.5vw,128px);line-height:.95;letter-spacing:.04em;margin:18px 0 8px;background:linear-gradient(180deg,#fff 10%,#f6c3dd 45%,#ff3d8b 80%,#8a5cff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px rgba(255,61,139,.35))}
+h1 .flick{animation:flick 7s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.25}94%{opacity:1}96%{opacity:.4}97%{opacity:1}}
+.whisper{min-height:2.2em;margin-top:10px;font:400 clamp(17px,2.2vw,22px) "JetBrains Mono";color:#cfc4e2;letter-spacing:.02em}
+.whisper::after{content:"_";color:var(--pink);animation:pulse 1s steps(1) infinite}
+
+.reward{margin-top:44px;width:min(620px,100%);padding:26px 26px 22px;border-radius:22px;border:1px solid rgba(255,207,107,.28);background:linear-gradient(180deg,rgba(255,207,107,.07),rgba(5,3,10,.6));backdrop-filter:blur(8px);box-shadow:0 0 60px -20px rgba(255,207,107,.45)}
+.reward small{font:500 12px "JetBrains Mono";letter-spacing:.36em;color:var(--gold)}
+.reward h2{font-family:Cinzel,serif;font-weight:700;font-size:clamp(26px,4vw,38px);line-height:1.15;margin:10px 0 8px}
+.reward p{color:var(--mut);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 4px}
+.steps div{padding:14px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025)}
+.steps b{display:block;font:500 11px "JetBrains Mono";letter-spacing:.2em;color:var(--pink);margin-bottom:6px}
+.steps span{font-size:14px;color:#ddd4ec}
+.tag{font-family:"JetBrains Mono";color:var(--txt)}
+.ca{margin-top:28px;display:flex;align-items:center;gap:12px;max-width:min(620px,100%);padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(5,3,10,.6);backdrop-filter:blur(6px);cursor:pointer;color:var(--txt);font:inherit;text-align:left}
+.ca i{font:500 11px "JetBrains Mono";font-style:normal;letter-spacing:.2em;color:var(--gold);flex:none}
+.ca code{font:400 13px "JetBrains Mono";color:#cfc4e2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ca span{flex:none;font:500 11px "JetBrains Mono";letter-spacing:.15em;color:var(--mut)}
+.ca:hover{border-color:rgba(255,61,139,.5)}
+.fine{margin-top:34px;max-width:620px;font-size:12px;line-height:1.6;color:var(--dim)}
+.hint{position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:6;font:400 11px "JetBrains Mono";letter-spacing:.3em;color:var(--dim);transition:opacity 1s;pointer-events:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9;padding:10px 16px;border-radius:12px;background:#fff;color:#000;font:500 14px Inter;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+.fade{opacity:0;transform:translateY(14px);animation:rise 1.6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (max-width:620px){.steps{grid-template-columns:1fr}.reward{padding:22px 18px}.top{padding:14px 16px}.out{font-size:11px;letter-spacing:.16em}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="rr" viewBox="0 0 1000 1000">
-    <defs><path id="rrRing" d="M500,500 m-398,0 a398,398 0 1,1 796,0 a398,398 0 1,1 -796,0"/></defs>
-    <circle cx="500" cy="500" r="492" fill="#0a0a0a"/>
-    <circle cx="500" cy="500" r="486" fill="none" stroke="#fff" stroke-width="10"/>
-    <circle cx="500" cy="500" r="352" fill="#0a0a0a" stroke="#fff" stroke-width="10"/>
-    <text font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="84" fill="#fff" letter-spacing="2"><textPath href="#rrRing" startOffset="0" textLength="2490" lengthAdjust="spacing">• THE REAL REPORT • THE REAL REPORT</textPath></text>
-    <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
-      <circle cx="500" cy="500" r="300"/>
-      <ellipse cx="500" cy="500" rx="105" ry="300"/><ellipse cx="500" cy="500" rx="210" ry="300"/>
-      <line x1="500" y1="200" x2="500" y2="800"/><line x1="200" y1="500" x2="800" y2="500"/>
-      <path d="M286,290 Q500,276 714,290"/><path d="M221,390 Q500,376 779,390"/><path d="M221,610 Q500,624 779,610"/><path d="M286,710 Q500,724 714,710"/>
-    </g>
-    <text x="508" y="650" text-anchor="middle" font-family="'Pinyon Script', 'Snell Roundhand', cursive" font-size="520" fill="#fff" stroke="#0a0a0a" stroke-width="34" stroke-linejoin="round" paint-order="stroke">R</text>
-    <text x="508" y="650" text-anchor="middle" font-family="'Pinyon Script', 'Snell Roundhand', cursive" font-size="520" fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round">R</text>
-  </symbol>
-</svg>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="ghost" aria-hidden="true"><img id="ghost" src="assets/murda-photo-2.png" alt=""></div>
+<div class="veil"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<!-- ============ LOADING SCREEN ============ -->
-<div id="loader">
-  <div class="ld-art">
-    <div class="ld-panel p1">
-      <div class="ld-art-bg"></div>
-      <img class="gta-art" data-photo="b" alt="">
-    </div>
-    <div class="ld-panel p2">
-      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
-        <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".6" stop-color="#ff2e88"/><stop offset="1" stop-color="#12e0c4"/></linearGradient></defs>
-        <rect width="300" height="400" fill="url(#g2)"/>
-        <g fill="#140818">
-          <path d="M40 400 C45 320 35 260 60 190" stroke="#140818" stroke-width="10" fill="none"/>
-          <path d="M60 190 C30 170 0 180 -10 210 C20 190 40 192 60 194Z M60 190 C90 160 120 165 130 195 C110 180 85 182 62 194Z M60 190 C50 150 20 140 0 150 C25 155 45 170 58 192Z M60 190 C75 150 105 140 125 150 C100 155 80 170 62 192Z"/>
-          <path d="M20 360 L60 330 L150 322 L200 300 L250 300 L290 330 L290 370 L20 375Z"/>
-          <circle cx="85" cy="372" r="20"/><circle cx="245" cy="372" r="20"/>
-        </g>
-        <rect x="20" y="370" width="270" height="6" fill="#ff2e88" opacity=".9"/>
-      </svg>
-    </div>
-    <div class="ld-panel p3">
-      <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice">
-        <rect width="300" height="400" fill="#1b0b2e"/>
-        <text x="150" y="90" text-anchor="middle" font-family="Permanent Marker" font-size="40" fill="#ff2e88">Murda FM</text>
-        <text x="150" y="122" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#12e0c4" letter-spacing="5">ON AIR • 98.6</text>
-        <g fill="#0a0410">
-          <rect x="70" y="300" width="160" height="100"/>
-          <path d="M85 210 L120 250 L125 300 L115 300 L110 255 L80 220Z"/>
-          <rect x="70" y="190" width="30" height="50" rx="12" transform="rotate(-30 85 215)"/>
-        </g>
-        <rect x="70" y="300" width="160" height="6" fill="#ff2e88"/>
-        <circle cx="240" cy="160" r="10" fill="#ff1f1f"/>
-      </svg>
-    </div>
-  </div>
-  <div class="ld-title">
-    <div class="ld-name">UNCLE MURDA</div>
-    <div class="ld-sub">Brooklyn's Own · Now in Leonida</div>
-    <div class="partner ld-partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
-  </div>
-  <div class="ld-bottom">
-    <div class="ld-drop">GTA VI LAUNCHES IN <span class="countdown">--</span></div>
-    <div class="ld-tip" id="ldTip">TIP: Murda doesn't do retakes.</div>
-    <button id="startBtn" hidden>CLICK TO START</button>
-    <div class="ld-spin"><i></i><span id="ldStatus">LOADING</span></div>
-  </div>
-</div>
-
-<!-- ============ NAV ============ -->
-<nav>
-  <a class="logo" href="#hero"><b>UNCLE</b><span>MURDA</span></a>
-  <ul>
-    <li><a href="#hero" data-act="play">Play</a></li>
-    <li><a href="#dossier">Character</a></li>
-    <li><a href="#screens">Screens</a></li>
-    <li><a href="#radio">Radio</a></li>
-    <li><a href="#menu">Map</a></li>
-  </ul>
-</nav>
-
-<!-- ============ HERO / GAME ============ -->
-<header id="hero">
-  <canvas id="game"></canvas>
-  <div class="vignette"></div>
-  <div class="grain"></div>
-  <div class="letterbox top"></div><div class="letterbox bottom"></div>
-  <div id="fade"></div>
-
-  <div id="heroTitle">
-    <div class="ho-left">
-      <div class="ht-kick">NEW CHARACTER · LEONIDA</div>
-      <div class="partner">IN PARTNERSHIP WITH <b>ROCKSTAR GAMES</b></div>
-      <h1>Uncle Murda<span>Brooklyn's Own</span></h1>
-      <p class="ho-bio">Brooklyn came down south. Murda just landed in Vice City with a chain, a notebook full of names and nothing to lose. Next up: his own radio show on Murda FM 98.6. Leonida has to deal with him.</p>
-      <div class="ho-chips">
-        <div><small>HOME TURF</small><b>Little Brooklyn, Vice City</b></div>
-        <div><small>RIDE</small><b>'87 Vapid Coupe, matte black</b></div>
-        <div><small>RADIO SHOW</small><b>Murda FM 98.6 · Soon</b></div>
-        <div><small>WANTED</small><b class="stars-txt">★★★★★<i>★</i></b></div>
-      </div>
-      <div class="vi-box">
-        <div class="vi-head"><b>GTA VI LAUNCHES IN</b><span>Uncle Murda playable day one</span></div>
-        <div class="cd vi-cd" aria-live="polite">
-          <div><b data-cd="d">0</b><small>DAYS</small></div><i>:</i>
-          <div><b data-cd="h">00</b><small>HRS</small></div><i>:</i>
-          <div><b data-cd="m">00</b><small>MIN</small></div><i>:</i>
-          <div><b data-cd="s">00</b><small>SEC</small></div>
-        </div>
-        <div class="vi-out">OUT NOW · <button type="button" data-act="play">PLAY AS MURDA →</button></div>
-        <div class="vi-foot"><span class="cd-when">Out <b id="releaseLocal">Nov 19</b></span><button class="vi-remind" id="remindBtn" type="button">🔔 Remind me</button></div>
-      </div>
-      <button type="button" class="ca-bar" data-copy-ca aria-label="Copy contract address">
-        <span class="ca-tag">CA</span>
-        <code class="ca-full">CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump</code>
-        <span class="ca-copy">TAP TO COPY</span>
-      </button>
-      <div class="ht-btns">
-        <button class="gbtn" data-act="play" type="button">🚗 Play as Murda</button>
-        <a class="gbtn alt" href="#dossier">📁 Character File</a>
-        <a class="gbtn ghost" href="#menu">🗺 Map</a>
-      </div>
-    </div>
-    <div class="ho-art">
-      <div class="art-card">
-        <div class="art-sun"></div>
-        <svg class="art-palms" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g fill="#1b0b2e"><path d="M40 300 C45 230 35 180 62 120" stroke="#1b0b2e" stroke-width="9" fill="none"/><path d="M62 120 C30 100 0 110 -10 140 C20 120 40 122 62 124Z M62 120 C92 90 122 95 132 125 C112 110 87 112 64 124Z M62 120 C52 80 22 70 2 80 C27 85 47 100 60 122Z M62 120 C77 80 107 70 127 80 C102 85 82 100 64 122Z"/><path d="M360 300 C355 240 368 200 345 150" stroke="#1b0b2e" stroke-width="8" fill="none"/><path d="M345 150 C315 130 290 140 280 165 C305 150 325 152 345 154Z M345 150 C375 125 400 130 410 155 C390 142 365 145 347 154Z M345 150 C340 115 312 105 295 112 C318 118 333 130 343 152Z"/><path d="M0 300 V262 H40 V240 H70 V258 H110 V230 H140 V250 H180 V270 H230 V245 H260 V262 H300 V236 H330 V256 H400 V300Z"/></g></svg>
-        <img class="gta-art" alt="Uncle Murda in loading-screen art style">
-        <div class="art-name"><b>UNCLE MURDA</b><small>PLAYABLE CHARACTER</small></div>
-      </div>
-    </div>
-  </div>
-
-    <div id="hudTR">
-      <div class="hud-time" id="clock">19:42</div>
-      <div class="hud-cash" id="cash">$1,250,000</div>
-      <div class="hud-weapon">
-        <svg viewBox="0 0 64 32"><rect x="4" y="9" width="30" height="14" rx="7" fill="#fff"/><rect x="34" y="13" width="22" height="6" rx="3" fill="#fff"/><rect x="8" y="12" width="20" height="2" fill="#000" opacity=".4"/><rect x="8" y="17" width="20" height="2" fill="#000" opacity=".4"/></svg>
-        <span>MIC</span>
-      </div>
-      <div class="hud-stars" id="stars"><i class="on">★</i><i class="on">★</i><i class="on">★</i><i>★</i><i>★</i></div>
-    </div>
-    <div id="radar">
-      <canvas id="minimap" width="480" height="300"></canvas>
-      <div class="radar-bars"><i class="hp"><b></b></i><i class="ar"><b></b></i></div>
-    </div>
-    <div id="speedo"><b id="mph">0</b><span>MPH</span></div>
-  </div>
-
-    <div id="radioPop"><small>RADIO</small><strong id="radioName">MURDA FM 98.6</strong><span id="radioSong"></span></div>
-  <div id="areaPop"><span id="areaName">Vice Beach</span><small id="areaSub">LEONIDA</small></div>
-  <div id="mission"></div>
-  <div id="subtitle"></div>
-  <div id="cutShort"><div class="band"><h2>Five Stars</h2><p>THE WHOLE CITY IS LOOKING FOR MURDA</p><div class="tbc">LOSE THE HEAT · STAY ON THE ROAD</div></div></div></div>
-  <div id="passed"><div class="band"><h2>Mission Passed</h2><p>RESPECT +</p><small id="passedEp"></small><div class="tbc">LEONIDA KNOWS THE NAME NOW</div></div></div></div>
-
-  <div class="touch-pad mob-only" aria-label="Driving controls">
-    <button type="button" data-act="faster" aria-label="Speed up">▲</button><button type="button" data-act="slower" aria-label="Slow down">▼</button>
-    <button type="button" data-act="left" aria-label="Change lane left">◀</button><button type="button" data-act="right" aria-label="Change lane right">▶</button>
-  </div>
-  <div id="controls">
-    <div class="ctl-row">
-      <button class="cbtn" data-act="attract" id="modeBtn">⏏ EXIT</button>
-      <button class="cbtn" data-act="cam">🎥 CAMERA</button>
-      <button class="cbtn on" data-act="cine" id="cineBtn">🎬 CINEMATIC</button>
-      <button class="cbtn" data-act="radio">📻 RADIO</button>
-      <button class="cbtn" data-act="mute" id="muteBtn">🔊</button>
-    </div>
-    <div class="ctl-help">W/S speed · A/D lanes · C camera · Q radio · Esc exit</div>
-  </div>
+<header class="top">
+  <span class="out"><i></i>GTA VI · OUT NOW</span>
+  <button type="button" class="snd" id="snd" aria-pressed="false">♪ LISTEN</button>
 </header>
 
-<div class="ticker"><div>★ LNN BREAKING ★ UNCLE MURDA TOUCHES DOWN IN VICE CITY ★ MATTE-BLACK COUPE SPOTTED ON THE OCEAN STRIP AT 140 MPH ★ LITTLE BROOKLYN BLOCK PARTY "GETTING OUT OF HAND" ★ LEONIDA POLICE "MONITORING THE SITUATION" ★ GATOR SEEN RIDING SHOTGUN ★ UNCLE MURDA GETTING HIS OWN RADIO SHOW: THE MURDA HOUR, NIGHTLY ON MURDA FM 98.6 ★ GTA VI LAUNCHES NOV 19: UNCLE MURDA PLAYABLE DAY ONE ★ NEW PLAYABLE CHARACTER ★</div></div>
+<main>
+  <svg class="sigil fade" viewBox="0 0 400 400" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3d8b"/><stop offset=".5" stop-color="#8a5cff"/><stop offset="1" stop-color="#2de2c8"/></linearGradient>
+    <path id="ring" d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0"/></defs>
+    <g class="spin">
+      <circle cx="200" cy="200" r="182" fill="none" stroke="url(#g)" stroke-width="1.5" opacity=".7"/>
+      <circle cx="200" cy="200" r="170" fill="none" stroke="url(#g)" stroke-width="1" stroke-dasharray="2 9" opacity=".8"/>
+      <text font-family="JetBrains Mono" font-size="15" letter-spacing="7" fill="#cfc4e2" opacity=".75"><textPath href="#ring" startOffset="0">LEONIDA · 98.6 · LITTLE BROOKLYN · THE RAP UP · FIND HIM ·</textPath></text>
+    </g>
+    <g class="spin2">
+      <polygon points="200,62 320,270 80,270" fill="none" stroke="url(#g)" stroke-width="1.5" opacity=".55"/>
+      <polygon points="200,338 80,130 320,130" fill="none" stroke="url(#g)" stroke-width="1.5" opacity=".55"/>
+    </g>
+    <circle cx="200" cy="200" r="64" fill="#05030a" stroke="url(#g)" stroke-width="2"/>
+    <path d="M150 200 Q200 160 250 200 Q200 240 150 200Z" fill="none" stroke="#efe9f7" stroke-width="2"/>
+    <circle cx="200" cy="200" r="14" fill="url(#g)"><animate attributeName="r" values="12;16;12" dur="4s" repeatCount="indefinite"/></circle>
+  </svg>
 
-<!-- ============ CHARACTER FILE ============ -->
-<section id="dossier">
-  <div class="wrap dz-grid">
-    <div class="dz-photo">
-      <div class="dz-lines" aria-hidden="true"></div>
-      <img class="gta-art" data-photo="b" alt="Uncle Murda character art">
-      <div class="dz-plate"><b>LEONIDA PD</b><span>FILE #UM-718</span><small>VICE CITY · LITTLE BROOKLYN</small></div>
+  <div class="eyebrow fade" style="animation-delay:.3s">An easter egg in Leonida</div>
+  <h1 class="fade" style="animation-delay:.5s">Find <span class="flick">Murda</span></h1>
+  <div class="whisper fade" id="whisper" style="animation-delay:.9s"></div>
+
+  <section class="reward fade" style="animation-delay:1.3s">
+    <small>THE FIRST TO FIND HIM</small>
+    <h2>Takes the reward.</h2>
+    <p>The first player to find Uncle Murda's easter egg in GTA VI wins a reward paid from the creator fees on the coin below.</p>
+    <div class="steps">
+      <div><b>I</b><span>Find him in GTA VI</span></div>
+      <div><b>II</b><span>Screenshot or clip it</span></div>
+      <div><b>III</b><span>Post it with <span class="tag">#FindMurda</span></span></div>
     </div>
-    <div class="dz-copy">
-      <div class="tag">◉ CHARACTER FILE</div>
-      <h2 class="h2">Uncle <em>Murda</em></h2>
-      <p>Born and raised in East New York. Twenty years of calling names on records and never taking one back. When the heat in Brooklyn got too loud, he moved south, bought the loudest car in Vice City and set up shop in Little Brooklyn. He's not here to blend in.</p>
-      <div class="dz-facts">
-        <div><small>ORIGIN</small><b>East New York, Brooklyn</b></div>
-        <div><small>BASE</small><b>Little Brooklyn, Vice City</b></div>
-        <div><small>CREW</small><b>The Rap Up</b></div>
-        <div><small>RADIO</small><b>Host, The Murda Hour</b></div>
-      </div>
-      <div class="dz-special">
-        <small>SPECIAL ABILITY</small>
-        <b>The Rap Up</b>
-        <p>Call out a rival by name. Their Respect drops across the whole city, and every crew in Leonida hears about it.</p>
-      </div>
-      <div class="dz-skills" id="dzSkills"></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ LOADING SCREENS ============ -->
-<section id="screens">
-  <div class="wrap">
-    <div class="tag">◉ LOADING SCREENS</div>
-    <h2 class="h2">Welcome to <em>Leonida</em></h2>
-    <div class="sc-grid">
-      <figure class="sc sc-1">
-        <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="scg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a0a45"/><stop offset=".45" stop-color="#ff2e88"/><stop offset=".7" stop-color="#ff8a1f"/><stop offset="1" stop-color="#ffd23f"/></linearGradient><linearGradient id="sea1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12e0c4"/><stop offset="1" stop-color="#0b4a6a"/></linearGradient><mask id="sun1"><rect width="400" height="520" fill="#fff"/><g fill="#000"><rect y="250" width="400" height="5"/><rect y="268" width="400" height="7"/><rect y="288" width="400" height="9"/></g></mask></defs>
-        <rect width="400" height="520" fill="url(#scg1)"/><circle cx="210" cy="250" r="105" fill="#ffe766" mask="url(#sun1)"/>
-        <g fill="#2a0f3d"><path d="M0 330 V290 H30 V250 H62 V280 H96 V230 H120 V300 H400 V330Z"/><path d="M300 330 V240 H330 V200 H350 V240 H372 V330Z"/></g>
-        <rect y="328" width="400" height="74" fill="url(#sea1)"/><g stroke="#fff" stroke-opacity=".5" stroke-width="3"><path d="M20 350 h60 M150 368 h80 M280 352 h70 M90 388 h50"/></g>
-        <path d="M0 400 Q200 380 400 402 V520 H0Z" fill="#ffd9a0"/>
-        <g fill="#140818"><path d="M70 520 C76 440 62 390 94 310" stroke="#140818" stroke-width="10" fill="none"/><path d="M94 310 C58 286 22 300 10 332 C40 312 66 314 94 316Z M94 310 C130 276 166 282 178 316 C154 300 124 302 96 316Z M94 310 C84 264 50 254 26 266 C56 272 78 290 92 312Z M94 310 C104 266 140 256 160 262 C136 270 112 288 96 312Z"/><path d="M330 520 C324 452 336 410 312 350" stroke="#140818" stroke-width="8" fill="none"/><path d="M312 350 C282 330 256 340 246 365 C272 350 292 352 312 354Z M312 350 C342 325 370 330 380 355 C360 342 334 345 314 354Z"/></g>
-        <g fill="#ff2e88"><rect x="150" y="436" width="90" height="34" rx="6"/></g><text x="195" y="459" text-anchor="middle" font-family="Bebas Neue" font-size="18" fill="#fff" letter-spacing="2">LIFEGUARD</text></svg>
-        <figcaption>OCEAN STRIP · SUNSET</figcaption></figure>
-      <figure class="sc sc-2">
-        <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="scg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a1f"/><stop offset=".55" stop-color="#ff2e88"/><stop offset="1" stop-color="#2a0f3d"/></linearGradient></defs><rect width="400" height="520" fill="url(#scg2)"/><circle cx="200" cy="250" r="120" fill="#ffd23f" opacity=".85"/><g fill="#140818"><path d="M0 380 V330 H40 V300 H70 V320 H120 V280 H150 V310 H200 V340 H260 V300 H300 V320 H350 V290 H400 V380Z"/><path d="M30 470 L80 430 L190 420 L250 392 L320 392 L380 430 L390 474 L30 480Z"/><circle cx="110" cy="476" r="26"/><circle cx="320" cy="476" r="26"/></g><rect x="30" y="472" width="360" height="6" fill="#ff2e88"/><g fill="#140818"><path d="M60 520 C66 430 52 380 84 300" stroke="#140818" stroke-width="10" fill="none"/><path d="M84 300 C48 276 12 290 0 322 C30 302 56 304 84 306Z M84 300 C120 266 156 272 168 306 C144 290 114 292 86 306Z M84 300 C74 254 40 244 16 256 C46 262 68 280 82 302Z"/></g></svg>
-        <figcaption>'87 VAPID COUPE</figcaption></figure>
-      <figure class="sc sc-3"><div class="sc-cop"></div><img class="gta-art" alt="Uncle Murda wanted"><div class="sc-wanted"><b>WANTED</b><span>★★★★★</span></div><figcaption>FIVE STARS · LITTLE BROOKLYN</figcaption></figure>
-      <figure class="sc sc-4">
-        <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><rect width="400" height="520" fill="#140a26"/><g fill="#0a0414"><path d="M0 520 V250 H60 V180 H110 V230 H160 V140 H220 V210 H270 V160 H330 V240 H400 V520Z"/></g><g fill="#ffcf6a"><rect x="72" y="200" width="6" height="9"/><rect x="90" y="230" width="6" height="9"/><rect x="124" y="250" width="6" height="9"/><rect x="170" y="170" width="6" height="9"/><rect x="188" y="200" width="6" height="9"/><rect x="232" y="230" width="6" height="9"/><rect x="284" y="190" width="6" height="9"/><rect x="300" y="220" width="6" height="9"/><rect x="344" y="260" width="6" height="9"/><rect x="366" y="290" width="6" height="9"/><rect x="72" y="280" width="6" height="9"/><rect x="176" y="260" width="6" height="9"/><rect x="290" y="280" width="6" height="9"/></g><text x="200" y="120" text-anchor="middle" font-family="Permanent Marker" font-size="58" fill="#ff2e88" style="filter:drop-shadow(0 0 12px #ff2e88)">Murda FM</text><text x="200" y="160" text-anchor="middle" font-family="Bebas Neue" font-size="30" letter-spacing="6" fill="#12e0c4">98.6 · ON AIR</text><rect x="120" y="330" width="160" height="190" fill="#05020a"/><rect x="150" y="360" width="100" height="70" fill="#ff2e88" opacity=".75"/><rect x="120" y="326" width="160" height="6" fill="#12e0c4"/></svg>
-        <figcaption>MURDA FM · LITTLE BROOKLYN</figcaption></figure>
-    </div>
-  </div>
-</section>
+  <button type="button" class="ca fade" style="animation-delay:1.6s" id="ca" aria-label="Copy contract address"><i>CA</i><code>CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump</code><span>COPY</span></button>
 
-<!-- ============ RADIO SHOW ============ -->
-<section id="radio">
-  <div class="wrap rd-grid">
-    <div class="rd-copy">
-      <div class="tag">◉ COMING SOON TO THE AIRWAVES</div>
-      <h2 class="h2">The Murda <em>Hour</em></h2>
-      <p>Uncle Murda is getting his own radio show. Every night on <b>Murda FM 98.6</b>, he takes over the airwaves across Leonida: new music first, call-outs nobody else will make, and a phone line that never stops ringing. Tune in from any car in the city.</p>
-      <ul class="rd-segs">
-        <li><i>01</i><div><b>The Rap Up</b><small>Weekly call-outs. Names, receipts, no edits.</small></div></li>
-        <li><i>02</i><div><b>Little Brooklyn Exclusives</b><small>New music, played here first.</small></div></li>
-        <li><i>03</i><div><b>The Call-In Line</b><small>Leonida calls in live. Murda decides who stays on air.</small></div></li>
-        <li><i>04</i><div><b>Ocean Strip After Dark</b><small>Late-night mixes for the drive home.</small></div></li>
-      </ul>
-      <div class="ht-btns">
-        <button class="gbtn" type="button" data-tune>📻 Tune to 98.6</button>
-        <a class="gbtn ghost" href="#menu" data-open-tab="pod">All stations</a>
-      </div>
-    </div>
-    <div class="rd-stereo" aria-label="Murda FM 98.6 car stereo">
-      <div class="rd-screen">
-        <div class="rd-top"><span class="rd-live">● ON AIR SOON</span><span>FM</span></div>
-        <div class="rd-freq">98.6</div>
-        <div class="rd-name">MURDA FM</div>
-        <div class="rd-show">THE MURDA HOUR · HOSTED BY UNCLE MURDA</div>
-        <div class="rd-eq" aria-hidden="true"><i style="--d:0.0s"></i><i style="--d:0.1s"></i><i style="--d:0.2s"></i><i style="--d:0.3s"></i><i style="--d:0.4s"></i><i style="--d:0.5s"></i><i style="--d:0.6s"></i><i style="--d:0.7s"></i><i style="--d:0.8s"></i><i style="--d:0.0s"></i><i style="--d:0.1s"></i><i style="--d:0.2s"></i><i style="--d:0.3s"></i><i style="--d:0.4s"></i><i style="--d:0.5s"></i><i style="--d:0.6s"></i><i style="--d:0.7s"></i><i style="--d:0.8s"></i><i style="--d:0.0s"></i><i style="--d:0.1s"></i><i style="--d:0.2s"></i><i style="--d:0.3s"></i><i style="--d:0.4s"></i><i style="--d:0.5s"></i></div>
-      </div>
-      <div class="rd-dial" aria-hidden="true"><div class="rd-scale"><span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span></div><div class="rd-needle"></div></div>
-      <div class="rd-knobs" aria-hidden="true"><b></b><b></b></div>
-      <div class="rd-when"><small>SCHEDULE</small><b>NIGHTLY · 10 PM LEONIDA TIME</b></div>
-    </div>
-  </div>
-</section>
+  <p class="fine fade" style="animation-delay:1.9s">A community hunt, not a confirmed Rockstar feature. First verified post wins. Unofficial fan page, not affiliated with Rockstar Games or Take-Two Interactive. Not financial advice.</p>
+</main>
+<div class="hint" id="hint">MOVE YOUR LIGHT</div>
+<div class="toast" id="toast"></div>
 
-<!-- ============ PAUSE MENU ============ -->
-<section id="menu">
-  <div class="wrap">
-    <div class="pm">
-      <div class="pm-head">
-        <div class="pm-title">Uncle Murda<span>LEONIDA</span></div>
-        <div class="pm-player">
-          <div class="pm-av">UM</div>
-          <div><b>UNCLE MURDA</b><small id="pmInfo">SATURDAY 19:42 · BANK $1,250,000</small></div>
-        </div>
-      </div>
-      <div class="pm-tabs" role="tablist">
-        <button class="on" data-tab="map">Map</button>
-        <button data-tab="brief">Brief</button>
-        <button data-tab="pod">Radio</button>
-        <button data-tab="stats">Stats</button>
-      </div>
+<script>
+/* ---------- cryptic whispers ---------- */
+const LINES = ['Brooklyn came south.', 'He moved in when the city wasn\'t looking.', 'Listen between the stations. 98.6.', 'Look where the neon doesn\'t reach.', 'Little Brooklyn never sleeps.', 'He left his name somewhere in Leonida.', 'The first to see him gets paid.'];
+const wh = document.getElementById('whisper'); let li = 0;
+async function whisper() {
+  const s = LINES[li++ % LINES.length];
+  for (let i = 0; i <= s.length; i++) { wh.textContent = s.slice(0, i); await new Promise((r) => setTimeout(r, 42)); }
+  await new Promise((r) => setTimeout(r, 2600));
+  for (let i = s.length; i >= 0; i--) { wh.textContent = s.slice(0, i); await new Promise((r) => setTimeout(r, 16)); }
+  setTimeout(whisper, 400);
+}
+setTimeout(whisper, 1400);
 
-      <div class="pm-pane on" id="pane-map">
-        <div class="map-wrap">
-          <div class="map-stage" id="mapStage">
-            <canvas id="mapCanvas" aria-label="Interactive map of Leonida. Drag to pan, scroll to zoom, click a blip to set a waypoint."></canvas>
-            <div class="map-hud tl"><b>LEONIDA</b><small id="mapZone">VICE CITY</small></div>
-            <div class="map-hud tr"><button type="button" data-z="1" aria-label="Zoom in">+</button><button type="button" data-z="-1" aria-label="Zoom out">−</button><button type="button" data-home aria-label="Center on player">◎</button><button type="button" data-fs aria-label="Full screen">⛶</button></div>
-            <div class="map-hud bl"><span class="compass">N</span><span class="scalebar"><i></i><b id="mapScale">5 MI</b></span></div>
-            <div class="map-hud br">DRAG · SCROLL TO ZOOM · CLICK A BLIP TO SET A WAYPOINT</div>
-            <div class="map-scan"></div>
-            <div class="map-tip" id="mapTip" hidden></div>
-          </div>
-          <div class="map-info" id="mapInfo">
-            <small>WAYPOINT</small>
-            <h3>Murda's Spot</h3>
-            <p>Little Brooklyn safehouse. Pull up, park the coupe and don't say nothing slick.</p>
-          </div>
-        </div>
-        <div class="legend" id="legend"></div>
-      </div>
+/* ---------- the light: reveals the hidden portrait ---------- */
+const root = document.documentElement, ghost = document.querySelector('.ghost img'), hint = document.getElementById('hint');
+let tx = innerWidth / 2, ty = innerHeight * .45, cx = tx, cy = ty, moved = 0, auto = true;
+function setLight(x, y) { tx = x; ty = y; auto = false; clearTimeout(setLight.t); setLight.t = setTimeout(() => (auto = true), 4000); if (++moved > 12) hint.style.opacity = 0; }
+addEventListener('pointermove', (e) => setLight(e.clientX, e.clientY));
+addEventListener('scroll', () => { if (scrollY > 40) hint.style.opacity = 0; }, { passive: true });
+addEventListener('touchmove', (e) => { const t = e.touches[0]; if (t) setLight(t.clientX, t.clientY); }, { passive: true });
 
-      <div class="pm-pane" id="pane-brief">
-        <div class="brief">
-          <ul class="mlist" id="mlist"></ul>
-          <div class="mdetail" id="mdetail"></div>
-        </div>
-      </div>
+/* ---------- sky: fog, drifting dust, distant city glow ---------- */
+const cv = document.getElementById('sky'), g = cv.getContext('2d');
+let W, H, dpr; const DUST = [];
+function size() { dpr = Math.min(2, devicePixelRatio || 1); W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; }
+size(); addEventListener('resize', size);
+for (let i = 0; i < 140; i++) DUST.push({ x: Math.random(), y: Math.random(), z: .2 + Math.random() * .8, s: Math.random() * 6.28 });
+const FOG = Array.from({ length: 7 }, (_, i) => ({ x: Math.random(), y: .3 + Math.random() * .7, r: .35 + Math.random() * .35, v: (Math.random() - .5) * .006, c: i % 3 }));
+const COLS = ['255,61,139', '138,92,255', '45,226,200'];
+function frame(t) {
+  const s = t / 1000;
+  g.fillStyle = '#05030a'; g.fillRect(0, 0, W, H);
+  // horizon glow + skyline silhouette
+  const hy = H * .86, hg = g.createLinearGradient(0, hy - H * .4, 0, H); hg.addColorStop(0, 'rgba(255,61,139,0)'); hg.addColorStop(.7, 'rgba(255,61,139,.14)'); hg.addColorStop(1, 'rgba(138,92,255,.22)');
+  g.fillStyle = hg; g.fillRect(0, hy - H * .4, W, H);
+  g.fillStyle = '#07040d'; g.beginPath(); g.moveTo(0, H);
+  for (let x = 0, i = 0; x <= W; i++) { const bw = (30 + (i * 37 % 60)) * dpr, bh = (20 + (i * 53 % 110)) * dpr * (1 + .6 * Math.sin(i * 1.7)); g.lineTo(x, hy - bh * .55); g.lineTo(x + bw, hy - bh * .55); x += bw; }
+  g.lineTo(W, H); g.closePath(); g.fill();
+  // drifting fog
+  for (const f of FOG) { f.x += f.v * .016; if (f.x < -.4) f.x = 1.4; if (f.x > 1.4) f.x = -.4;
+    const fx = f.x * W, fy = (f.y + Math.sin(s * .07 + f.r * 9) * .03) * H, r = f.r * Math.max(W, H);
+    const fg = g.createRadialGradient(fx, fy, 0, fx, fy, r); fg.addColorStop(0, `rgba(${COLS[f.c]},.10)`); fg.addColorStop(1, `rgba(${COLS[f.c]},0)`); g.fillStyle = fg; g.fillRect(0, 0, W, H); }
+  // dust motes
+  for (const d of DUST) { d.y -= .00022 * d.z; if (d.y < -.02) d.y = 1.02; const x = (d.x + Math.sin(s * .2 + d.s) * .01) * W, y = d.y * H, a = (.25 + .35 * Math.sin(s * .8 + d.s)) * d.z;
+    g.fillStyle = `rgba(239,233,247,${Math.max(0, a)})`; g.fillRect(x, y, 1.6 * dpr * d.z, 1.6 * dpr * d.z); }
+  // the light wanders on its own until you take over
+  if (auto) { tx = innerWidth * (.5 + .22 * Math.sin(s * .23)); ty = innerHeight * (.42 + .12 * Math.sin(s * .31 + 1)); }
+  cx += (tx - cx) * .07; cy += (ty - cy) * .07;
+  const lg = g.createRadialGradient(cx * dpr, cy * dpr, 0, cx * dpr, cy * dpr, 260 * dpr); lg.addColorStop(0, 'rgba(255,220,240,.07)'); lg.addColorStop(1, 'rgba(255,220,240,0)'); g.fillStyle = lg; g.fillRect(0, 0, W, H);
+  if (ghost.naturalWidth) { const b = ghost.getBoundingClientRect(); ghost.style.setProperty('--x', (cx - b.left) + 'px'); ghost.style.setProperty('--y', (cy - b.top) + 'px'); ghost.style.setProperty('--r', (170 + 25 * Math.sin(s * 1.3)) + 'px'); }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
 
-      <div class="pm-pane" id="pane-pod">
-        <div class="pod">
-          <div class="stations">
-            <h4>Stations</h4>
-            <ul id="stlist"></ul>
-          </div>
-        </div>
-      </div>
+/* ---------- copy CA ---------- */
+const toast = (m) => { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 1800); };
+document.getElementById('ca').onclick = () => { const v = 'CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump'; navigator.clipboard?.writeText(v).then(() => toast('CA copied'), () => toast(v)); };
 
-      <div class="pm-pane" id="pane-stats">
-        <div class="stats" id="stats"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<button type="button" id="caDock" data-copy-ca aria-label="Copy contract address">
-  <span class="ca-tag">CA</span><code>CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump</code><span class="ca-copy">COPY</span>
-</button>
-
-<footer>
-  <button type="button" class="ca-foot" data-copy-ca aria-label="Copy contract address"><span class="ca-tag">CA</span> <code>CLpYtsRiz2pHhTVix84DLC8UzRS4txWZUfEL9X9bpump</code> <span class="ca-copy">COPY</span></button>
-  <div class="logo"><b>UNCLE</b><span>MURDA</span></div>
-  <p>Uncle Murda, presented in partnership with Rockstar Games. Rockstar Games, Grand Theft Auto and related marks are trademarks of Take-Two Interactive Software, Inc. All artwork on this site is original fan-style art; radio, missions and map locations are fictional.</p>
-</footer>
-
-<script src="page.js?v=21"></script>
-<script src="map.js?v=11"></script>
-<script type="module" src="game.js?v=15"></script>
+/* ---------- ambient drone (generated, no files) ---------- */
+let ac = null, master = null;
+document.getElementById('snd').onclick = (e) => {
+  const b = e.currentTarget;
+  if (!ac) {
+    ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+    const verbLen = ac.sampleRate * 4, ir = ac.createBuffer(2, verbLen, ac.sampleRate); for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); for (let i = 0; i < verbLen; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / verbLen, 2.5); }
+    const verb = ac.createConvolver(); verb.buffer = ir; const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.connect(verb).connect(master); lp.connect(master);
+    [[55, 0], [82.4, 4], [110, -6], [164.8, 7], [220.0, -3]].forEach(([f, det], i) => { const o = ac.createOscillator(), og = ac.createGain(), lfo = ac.createOscillator(), lg = ac.createGain(); o.type = i < 2 ? 'sawtooth' : 'triangle'; o.frequency.value = f; o.detune.value = det; og.gain.value = i < 2 ? .05 : .035; lfo.frequency.value = .05 + i * .03; lg.gain.value = og.gain.value * .8; lfo.connect(lg).connect(og.gain); o.connect(og).connect(lp); o.start(); lfo.start(); });
+    const lfoF = ac.createOscillator(), lfoFg = ac.createGain(); lfoF.frequency.value = .03; lfoFg.gain.value = 500; lfoF.connect(lfoFg).connect(lp.frequency); lfoF.start();
+    // a distant bell now and then
+    setInterval(() => { if (!b.classList.contains('on')) return; const t = ac.currentTime, o = ac.createOscillator(), og = ac.createGain(); o.type = 'sine'; o.frequency.value = [659, 784, 987, 1318][Math.floor(Math.random() * 4)]; og.gain.setValueAtTime(.0001, t); og.gain.exponentialRampToValueAtTime(.05, t + .02); og.gain.exponentialRampToValueAtTime(.0001, t + 4); o.connect(og).connect(verb); o.start(t); o.stop(t + 4.2); }, 5200);
+  }
+  const on = !b.classList.contains('on'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); b.textContent = on ? '♪ ON' : '♪ LISTEN';
+  ac.resume(); master.gain.cancelScheduledValues(ac.currentTime); master.gain.linearRampToValueAtTime(on ? .9 : 0, ac.currentTime + 1.5);
+};
+</script>
 </body>
 </html>
